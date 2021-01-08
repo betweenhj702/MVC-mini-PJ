@@ -2,6 +2,7 @@ drop table ORDER;
 drop table CART;
 drop sequence CART_SQ;
 drop sequence ORDER_SQ;
+purge recyclebin;
 
 create table CART(
 	C_SEQ number constraint CART_PK primary key,

@@ -1,7 +1,12 @@
-drop table ORDER; drop table
+drop table ORDER; drop table REPLY;
 drop table CART; drop table BOARDN; drop table BOARDQ;
 drop table PRODUCT;
 drop table MEMBER;
+drop sequence CART_SQ;
+drop sequence ORDER_SQ;
+drop sequence BOARDQ_SEQ;
+drop sequence BOARDN_SEQ;
+drop sequence REPLY_SEQ;
 purge recyclebin;
 
 create table MEMBER(
