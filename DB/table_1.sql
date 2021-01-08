@@ -1,4 +1,5 @@
-drop table CART;
+drop table ORDER; drop table
+drop table CART; drop table BOARDN; drop table BOARDQ;
 drop table PRODUCT;
 drop table MEMBER;
 purge recyclebin;
