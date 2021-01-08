@@ -17,16 +17,16 @@ insert into MEMBER values('admin@gmail.com','1q2w3e4r','관리자','01077777777','�
 insert into MEMBER values('betweenhj702@gmail.com','12341234','신동오','01012341234','전주시',null,null);
 insert into MEMBER values('ssu@gmail.com','12341234','이수진','0104321421','서울시',null, null);
 insert into MEMBER values('kwon@gmail.com','12341234','권연주','01022222222','광명시',null, null);
-insert into MEMBER values('lee@gmail.com','12341234','이민용','01033333333','김포시',null, null);
+insert into MEMBER values('lee@gmail.com','12341234','이민용','01033333333','서울시',null, null);
 
 create table PRODUCT(
-   P_CODE number constraint PRODUCT_PK primary key, 
-   P_TYPE varchar2(2), 
+   P_CODE number constraint PRODUCT_PK primary key,
+   P_TYPE varchar2(2),
    P_NAME varchar2(80) constraint PRODUCT_NN1 not null,
-   P_PRICE number(20), 
-   P_IMG varchar2(20), 
+   P_PRICE number(20),
+   P_IMG varchar2(20),
    P_INFO varchar2(100)
-); 
+);
 
 insert into PRODUCT values(1001, 1, '허니버터 아몬드', 7500, null, '210g');
 insert into PRODUCT values(1002, 1, '군옥수수맛 아몬드',  7500, null, '210g');
