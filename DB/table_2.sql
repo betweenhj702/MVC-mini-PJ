@@ -4,7 +4,7 @@ drop sequence CART_SQ;
 drop sequence ORDER_SQ;
 
 create table CART(
-	C_SEQ number constraint BOARD_PK primary key,
+	C_SEQ number constraint CART_PK primary key,
 	M_EMAIL varchar2(80) not null,
 	P_CODE number not null,
 	C_AMOUNT number not null,
