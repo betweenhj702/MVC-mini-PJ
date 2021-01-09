@@ -1,0 +1,21 @@
+페이지
+
+이민용
+
+회원가입, 회원정보수정, 회원정보 페이지
+member.html, member_update.html, member_view.html
+
+이수진
+
+로그인
+login.html
+
+권연주
+
+상품
+product.html
+
+신동오
+
+Q&A게시판, 공지게시판
+board_q.html, board_n.html
