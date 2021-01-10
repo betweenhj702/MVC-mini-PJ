@@ -16,7 +16,7 @@ create table BOARDQ(
    BQ_REFER number,
    BQ_LEV number,
    BQ_PLACE number,
-   constraint BOARDQ_FK foreign key(M_EMAIL) references MEMBER(M_EMAIL),
+   constraint BOARDQ_FK foreign key(M_EMAIL) references MEMBER(M_EMAIL)
 ); 
 create sequence BOARDQ_SEQ increment by 1 start with 1 nocache;
 

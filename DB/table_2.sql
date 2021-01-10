@@ -1,7 +1,7 @@
-drop table ORDER;
+drop table ORD;
 drop table CART;
-drop sequence CART_SQ;
-drop sequence ORDER_SQ;
+drop sequence CART_SEQ;
+drop sequence ORD_SEQ;
 purge recyclebin;
 
 create table CART(
@@ -15,11 +15,11 @@ create table CART(
     );
    create sequence CART_SEQ increment by 1 start with 1 nocache;
     
-create table ORDER(
-       O_SEQ number constraint ORDER_PK primary key,
+create table ORD(
+       O_SEQ number constraint ORD_PK primary key,
        C_SEQ number not null,
        O_ODATE date not null,
-       constraint ORDER_FK foreign key(C_SEQ) references CART(C_SEQ),
-      
+       constraint ORD_FK foreign key(C_SEQ) references CART(C_SEQ)
     );
-    create sequence ORDER_SEQ increment by 1 start with 1 nocache;
+
+    create sequence ORD_SEQ increment by 1 start with 1 nocache;
