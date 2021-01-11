@@ -34,12 +34,12 @@ create table PRODUCT(
    P_INFO varchar2(100)
 );
 
-insert into PRODUCT values(1001, 1, '허니버터 아몬드', 7500, null, '210g');
-insert into PRODUCT values(1002, 1, '군옥수수맛 아몬드',  7500, null, '210g');
-insert into PRODUCT values(1003, 1, '김맛 아몬드',  7500, null, '210g');
-insert into PRODUCT values(1004, 1, '민트초코 아몬드',  7500, null,'210g');
-insert into PRODUCT values(1005, 1, '마늘빵 아몬드', 7500, null,'210g');
-insert into PRODUCT values(1006, 1, '흑임자 아몬드',  7500,null,'210g');
+insert into PRODUCT values(1001, '1', '허니버터 아몬드', 7500, 'almond-black.png', '210g');
+insert into PRODUCT values(1002, '1', '군옥수수맛 아몬드',  7500, 'almond-black.png', '210g');
+insert into PRODUCT values(1003, '1', '김맛 아몬드',  7500, 'almond-black.png', '210g');
+insert into PRODUCT values(1004, '1', '민트초코 아몬드',  7500, 'almond-black.png','210g');
+insert into PRODUCT values(1005, '1', '마늘빵 아몬드', 7500, 'almond-black.png','210g');
+insert into PRODUCT values(1006, '1', '흑임자 아몬드',  7500,'almond-black.png','210g');
 
 commit;
 
