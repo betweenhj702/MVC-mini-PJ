@@ -1,4 +1,4 @@
-drop table ORDER; drop table REPLY;
+drop table ORD; drop table REPLY;
 drop table CART; drop table BOARDN; drop table BOARDQ;
 drop table PRODUCT;
 drop table MEMBER;
