@@ -181,7 +181,7 @@ class BoardQDAO {
 			}
 		}
 	}
-	BoardQ getContent(bq_seq){
+	BoardQ getContent(int bq_seq){
 		String sql = CONTENT;
 		ResultSet rs = null;
 		try{
@@ -216,7 +216,42 @@ class BoardQDAO {
 		}
 	}
 
-
-
+	void delete(int bq_seq){
+		String sql = DELETE;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bq_seq);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+	
+	void update(BoardQ boardQ){
+		String sql = UPDATE;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, boardQ.getBq_subject());
+			pstmt.setString(2, boardQ.getBq_content());
+			pstmt.setInt(3, boardQ.getBq_seq());
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
 
 }

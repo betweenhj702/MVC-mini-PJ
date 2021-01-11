@@ -14,4 +14,6 @@ class BoardQSQL {
 	
 	static final String UPDATECNT = "update BOARDQ set BQ_COUNT += 1 where BQ_SEQ = ?";
 	static final String CONTENT = "select * from BOARDQ where BQ_SEQ = ?";
+	static final String DELETE = "delete from BOARDQ where BQ_SEQ = ?";
+	static final String UPDATE = "update BOARDQ set BQ_SUBJECT=?, BQ_CONTENT=? where BQ_SEQ = ?";
 }

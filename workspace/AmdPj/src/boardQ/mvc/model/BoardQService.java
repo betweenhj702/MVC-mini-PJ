@@ -27,8 +27,19 @@ public class BoardQService {
 		dao.insert(boardq);
 	}
 
-	BoardQ showContentS(bq_seq){
+	public BoardQ showContentS(int bq_seq){
 		dao.updateCnt(bq_seq);
 		return dao.getContent(bq_seq);
+	}
+	public BoardQ showContentS(int bq_seq, String justFor){
+		return dao.getContent(bq_seq);
+	}
+	
+	public void deleteS(int bq_seq){
+		dao.delete(bq_seq);
+	}
+
+	public void updateS(BoardQ boardQ){
+		dao.update(boardQ);
 	}
 }
