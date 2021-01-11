@@ -31,6 +31,8 @@ public class BoardController extends HttpServlet {
 				write(request, response);
 			}else if(m.equals("insert")) {
 				insert(request,response);
+			}else if(m.equals("content")){
+				showContent(request,response);
 			}else{
 				list(request, response);
 			}
@@ -116,6 +118,19 @@ public class BoardController extends HttpServlet {
 		//에러처리추가
 		String view = "list.jsp";
 		response.sendRedirect(view);
+	}
+	private void showContent(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		int bq_seq = 0;
+		String seqStr = request.getParameter("seq");
+		bq_seq = check(seqStr);
+						
+		service.showContentS(bq_seq);
+
+		String view = "content.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(view);
+		rd.forward(request, response);
+
 	}
 	private int check(String seqStr){
 		if(seqStr != null){

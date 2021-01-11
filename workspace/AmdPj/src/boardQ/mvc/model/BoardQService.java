@@ -26,4 +26,9 @@ public class BoardQService {
 		boardq.setBq_refer(maxRef+1);
 		dao.insert(boardq);
 	}
+
+	BoardQ showContentS(bq_seq){
+		dao.updateCnt(bq_seq);
+		return dao.getContent(bq_seq);
+	}
 }

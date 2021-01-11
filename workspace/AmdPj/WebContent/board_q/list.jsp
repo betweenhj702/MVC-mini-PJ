@@ -94,7 +94,11 @@
                         <td>${boardQ.bq_seq}</td>
                         <td>${boardQ.m_name}</td>
                         <td>${boardQ.m_email}</td>
-                        <td><a href="#" >${boardQ.bq_subject}</a></td>
+                        <td>
+							<a href="board_q.do?m=content&seq=${boardQ.bq_seq}" >
+								${boardQ.bq_subject}
+							</a>
+						</td>
 						<td>${boardQ.bq_rdate}</td>
 						<td>${boardQ.bq_count}</td>
                     </tr>
