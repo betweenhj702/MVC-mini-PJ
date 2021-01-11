@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class BoardQ {
 	private int bq_seq;
-	
-	private String m_email;
+	private String m_name;
+	private String m_email;	//ÂüÁ¶Å°
 	private String bq_subject;
 	private String bq_content;
 	private Date bq_rdate;
@@ -33,6 +33,13 @@ public class BoardQ {
 	}
 	public void setBq_seq(int bq_seq) {
 		this.bq_seq = bq_seq;
+	}
+	
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	public String getM_email() {
 		return m_email;

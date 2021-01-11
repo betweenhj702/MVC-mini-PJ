@@ -26,7 +26,9 @@ class BoardQDAO {
 		}catch(NamingException ne) {
 		}
 	}
+	
 	ArrayList<BoardQ> list(int page, int pageSize){
+		ArrayList<BoardQ> list = new ArrayList<BoardQ>();
 		String sql = LIST;
 		ResultSet rs = null;
 		int initRow = (page-1)*pageSize;
@@ -41,26 +43,80 @@ class BoardQDAO {
 				String m_email = rs.getString("M_EMAIL");
 				String bq_subject = rs.getString("BQ_SUBJECT");
 				String bq_content = rs.getString("BQ_CONTENT");
-				Date bq_rdate = rs.getDate("RDATE");
+				Date bq_rdate = rs.getDate("BQ_RDATE");
 				int bq_count = rs.getInt("BQ_COUNT");
 				int bq_refer = rs.getInt("BQ_REFER");
 				int bq_lev = rs.getInt("BQ_LEV");
 				int bq_place = rs.getInt("BQ_PLACE");
 				BoardQ boardq = new BoardQ(bq_seq, m_email, bq_subject, bq_content, bq_rdate, bq_count,
 						bq_refer, bq_lev, bq_place);
-				
+				boardq.setM_name(getName(bq_seq));	//참조부분
+				list.add(boardq);
 			}
+			return list;
 		}catch(SQLException se) {
+			System.out.println("1");
 			System.out.println(se);
+			return null;
 		}finally {
 			try{
+				if(rs != null) rs.close();
 				if(pstmt != null) pstmt.close();
 				if(con != null) con.close();
 			}catch(SQLException se){
 			}
 		}
-		return null;
 	}
+	String getName(int bq_seq){
+		Connection con2 = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
+		String sql2 = BQ_NAME;
+		String m_name = null;
+		try {
+			con2 = ds.getConnection();
+			pstmt2 = con2.prepareStatement(sql2);
+			pstmt2.setInt(1, bq_seq);
+			rs2 = pstmt2.executeQuery();
+			if(rs2.next()) m_name = rs2.getString(1);
+			return m_name;
+		}catch(SQLException se) {
+			System.out.println(se);
+			return null;
+		}finally {
+			try{
+				if(rs2 != null) rs2.close();
+				if(pstmt2 != null) pstmt2.close();
+				if(con2 != null) con2.close();
+			}catch(SQLException se){
+			}
+		}
+		
+	}
+	long countRow() {
+		String sql = COUNT;
+		ResultSet rs = null;
+		long totalCount = 0L;
+		try {
+			con = ds.getConnection();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) totalCount = rs.getLong(1);
+			return totalCount;
+		}catch(SQLException se) {
+			
+			System.out.println(se);
+			return -1L;
+		}finally {
+			try{
+				if(rs != null) rs.close();
+				if(stmt != null) stmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+	
 	void insert(BoardQ boardQ) {
 		String sql = INSERT; //insert into BOARDQ values(BOARD_SEQ.nextval,?,?,?,SYSDATE,?,?,?,?)
 		try {
@@ -75,6 +131,7 @@ class BoardQDAO {
 			pstmt.setInt(7, boardQ.getBq_place());
 			pstmt.executeUpdate();
 		}catch(SQLException se) {
+			
 			System.out.println(se);
 		}finally {
 			try{

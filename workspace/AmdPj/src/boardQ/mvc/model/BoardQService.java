@@ -1,6 +1,9 @@
 package boardQ.mvc.model;
 
+import java.util.List;
+
 import amd.domain.BoardQ;
+import boardQ.mvc.vo.BoardQVO;
 
 public class BoardQService {
 	private BoardQDAO dao;
@@ -10,6 +13,12 @@ public class BoardQService {
 	}
 	public static BoardQService getInstance(){
 		return instance; 
+	}
+	
+	public BoardQVO list(int page, int pageSize) {
+		long totalCount = dao.countRow();
+		List<BoardQ> list = dao.list(page, pageSize);
+		return new BoardQVO(page, totalCount, pageSize, list);
 	}
 	
 	public void insertS(BoardQ boardq) {

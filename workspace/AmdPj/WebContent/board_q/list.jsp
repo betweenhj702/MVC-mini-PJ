@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, amd.domain.BoardQ, boardQ.mvc.vo.BoardQVO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 
@@ -83,20 +84,43 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="result" items="${list }" varStatus="status">
+               <c:if test="${empty boardQVO.list}">
+			       <TR align='center' noshade>
+			          <TD colspan="6">데이터가 없음</TD>
+			       </TR>
+			   </c:if> 
+			   <c:forEach items="${boardQVO.list}" var="boardQ">
                     <tr>
-                        <td><c:out value="${result.code }"/></td>
-                        <td><a href='#' onClick='fn_view(${result.code})'><c:out value="${result.title }"/></a></td>
-                        <td><c:out value="${result.writer }"/></td>
-                        <td><c:out value="${result.reg_datetime }"/></td>
-                        <td></td>
-						<td></td>
+                        <td>${boardQ.bq_seq}</td>
+                        <td>${boardQ.m_name}</td>
+                        <td>${boardQ.m_email}</td>
+                        <td><a href="#" >${boardQ.bq_subject}</a></td>
+						<td>${boardQ.bq_rdate}</td>
+						<td>${boardQ.bq_count}</td>
                     </tr>
-                </c:forEach>
+                 </c:forEach>
+                 	<tr align='center'>
+                 		<TD  colspan="6">
+				            <c:forEach begin="1" end="${boardQVO.totalPageCount}" var="i">
+						        <a id='aa' href="board_q.do?cp=${i}">
+						           <c:choose>
+						               <c:when test="${i==boardQVO.currentPage}">
+						                  <strong>${i}</strong>
+						               </c:when>
+							           <c:otherwise>
+							              ${i}
+							           </c:otherwise>
+						           </c:choose>
+						        </a>&nbsp;
+						    </c:forEach>
+                 		</TD>
+                 	</tr>
             </tbody>
         </table>
-		<div>            
-            <a href="board_q.do?m=write" class="btn btn-success">글쓰기</a>            
+		<div align='center'>
+       		
+		    <a  href="board_q.do?m=write" class="btn btn-success">글쓰기</a>
+		    
         </div>
      
     </div>

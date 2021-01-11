@@ -8,5 +8,7 @@ class BoardQSQL {
 			+ "(select ROWNUM rnum, aa.* from "
 			+ "(select * from BOARDQ order by BQ_REFER desc, BQ_PLACE asc) aa) "
 			+ "where rnum>? and rnum<=?";
-	
+	static final String COUNT = "select count(BQ_SEQ) from BOARDQ";
+	static final String BQ_NAME = "select m.M_NAME from MEMBER m join BOARDQ b on m.M_EMAIL= b.M_EMAIL"
+			+ " where b.BQ_SEQ = ?";
 }
