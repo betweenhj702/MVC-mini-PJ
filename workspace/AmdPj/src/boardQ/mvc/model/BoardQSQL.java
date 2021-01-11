@@ -11,4 +11,7 @@ class BoardQSQL {
 	static final String COUNT = "select count(BQ_SEQ) from BOARDQ";
 	static final String BQ_NAME = "select m.M_NAME from MEMBER m join BOARDQ b on m.M_EMAIL= b.M_EMAIL"
 			+ " where b.BQ_SEQ = ?";
+	
+	static final String UPDATECNT = "update BOARDQ set BQ_COUNT += 1 where BQ_SEQ = ?";
+	static final String CONTENT = "select * from BOARDQ where BQ_SEQ = ?";
 }

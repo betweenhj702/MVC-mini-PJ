@@ -164,4 +164,59 @@ class BoardQDAO {
 			}
 		}
 	}
+	void updateCnt(int bq_seq){
+		String sql = UPDATECNT;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bq_seq);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+	BoardQ getContent(bq_seq){
+		String sql = CONTENT;
+		ResultSet rs = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bq_seq);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				String m_email = rs.getString("M_EMAIL");
+				String bq_subject = rs.getString("BQ_SUBJECT");
+				String bq_content = rs.getString("BQ_CONTENT");
+				Date bq_rdate = rs.getDate("BQ_RDATE");
+				int bq_count = rs.getInt("BQ_COUNT");
+				int bq_refer = rs.getInt("BQ_REFER");
+				int bq_lev = rs.getInt("BQ_LEV");
+				int bq_place = rs.getInt("BQ_PLACE");
+				BoardQ boardq = new BoardQ(bq_seq, m_email, bq_subject, bq_content, bq_rdate, bq_count,
+						bq_refer, bq_lev, bq_place);
+				boardq.setM_name(getName(bq_seq));
+			}
+			return boardq;
+		}catch(SQLException se) {
+			System.out.println(se);
+			return null;
+		}finally{
+			try{
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+
+
+
+
 }
