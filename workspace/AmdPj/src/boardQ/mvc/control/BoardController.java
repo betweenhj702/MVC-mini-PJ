@@ -71,7 +71,7 @@ public class BoardController extends HttpServlet {
 		}
 		session.setAttribute("cp", cp);
 		
-		int ps = 5;
+		int ps = 20;
 
 		session.setAttribute("ps", ps);
 		
@@ -104,7 +104,7 @@ public class BoardController extends HttpServlet {
 		
 		//에러처리추가
 		//입력한 글내용으로 이동 고치자
-		String view = "list.jsp";	
+		String view = "board_q.do";	
 		response.sendRedirect(view);
 	}
 	private void showContent(HttpServletRequest request, HttpServletResponse response) 
@@ -138,6 +138,7 @@ public class BoardController extends HttpServlet {
 			throws ServletException, IOException{
 		String seqStr = request.getParameter("seq");
 		int bq_seq = check(seqStr);
+		
 		String m_email = request.getParameter("email");
 		String bq_subject = request.getParameter("subject");
 		String bq_content = request.getParameter("content");
@@ -162,7 +163,11 @@ public class BoardController extends HttpServlet {
 	}
 	private void moveRePage(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
+		String ref = request.getParameter("ref");
+		String lev = request.getParameter("lev");
+		String place = request.getParameter("place");
 		
+		//System.out.println(ref+lev+place);
 		String view = "rewrite.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
@@ -171,6 +176,20 @@ public class BoardController extends HttpServlet {
 	/////////////////////
 	private void rewrite(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException{
+		String email = request.getParameter("email");//로그인하면 email,name은 세션에서 자동으로 입력되게 할겅미
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		
+		String refStr = request.getParameter("ref");
+		String levStr = request.getParameter("lev");
+		String placeStr = request.getParameter("place");
+		
+		System.out.println(refStr+levStr+placeStr+email+subject+content);
+		
+		service.rewriteS(refStr, levStr, placeStr, email, subject, content);
+		
+		String view = "board_q.do";
+		response.sendRedirect(view);
 	}
 
 
