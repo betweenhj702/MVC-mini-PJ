@@ -184,6 +184,7 @@ class BoardQDAO {
 	BoardQ getContent(int bq_seq){
 		String sql = CONTENT;
 		ResultSet rs = null;
+		BoardQ boardq= null;
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -198,7 +199,7 @@ class BoardQDAO {
 				int bq_refer = rs.getInt("BQ_REFER");
 				int bq_lev = rs.getInt("BQ_LEV");
 				int bq_place = rs.getInt("BQ_PLACE");
-				BoardQ boardq = new BoardQ(bq_seq, m_email, bq_subject, bq_content, bq_rdate, bq_count,
+				boardq = new BoardQ(bq_seq, m_email, bq_subject, bq_content, bq_rdate, bq_count,
 						bq_refer, bq_lev, bq_place);
 				boardq.setM_name(getName(bq_seq));
 			}

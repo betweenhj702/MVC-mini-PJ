@@ -33,15 +33,15 @@ public class BoardController extends HttpServlet {
 				insert(request,response);
 			}else if(m.equals("content")){
 				showContent(request,response);
-			}else if(m.equals("moveUPage"){
+			}else if(m.equals("moveUPage")){
 				moveUPage(request,response);
-			}else if(m.equals("update"){
+			}else if(m.equals("update")){
 				update(request, response);
-			}else if(m.equals("delete"){
+			}else if(m.equals("delete")){
 				delete(request,response);
-			}else if(m.equals("moveRePage"){
+			}else if(m.equals("moveRePage")){
 				moveRePage(request,response);
-			}else if(m.equals("rewrite"){
+			}else if(m.equals("rewrite")){
 				rewrite(request, response);
 			}else{
 				list(request, response);
