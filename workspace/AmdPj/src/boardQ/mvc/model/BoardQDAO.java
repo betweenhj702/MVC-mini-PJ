@@ -181,9 +181,10 @@ class BoardQDAO {
 			}
 		}
 	}
-	BoardQ getContent(bq_seq){
+	BoardQ getContent(int bq_seq){
 		String sql = CONTENT;
 		ResultSet rs = null;
+		BoardQ boardq= null;
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -198,7 +199,7 @@ class BoardQDAO {
 				int bq_refer = rs.getInt("BQ_REFER");
 				int bq_lev = rs.getInt("BQ_LEV");
 				int bq_place = rs.getInt("BQ_PLACE");
-				BoardQ boardq = new BoardQ(bq_seq, m_email, bq_subject, bq_content, bq_rdate, bq_count,
+				boardq = new BoardQ(bq_seq, m_email, bq_subject, bq_content, bq_rdate, bq_count,
 						bq_refer, bq_lev, bq_place);
 				boardq.setM_name(getName(bq_seq));
 			}
@@ -216,7 +217,85 @@ class BoardQDAO {
 		}
 	}
 
-
-
-
+	void delete(int bq_seq){
+		String sql = DELETE;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bq_seq);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+	
+	void update(BoardQ boardQ){
+		String sql = UPDATE;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, boardQ.getBq_subject());
+			pstmt.setString(2, boardQ.getBq_content());
+			pstmt.setInt(3, boardQ.getBq_seq());
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+	////답글작업
+	int getNewPLACE(int bq_lev, int place) {
+		String sql = MAX_PLACE;
+		ResultSet rs = null;
+		int newPlace = place + 1;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bq_lev);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				newPlace = 1 + rs.getInt(1);
+			}
+			return newPlace;
+		}catch(SQLException se) {
+			System.out.println(se);
+			return -1;
+		}finally{
+			try{
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+	void updatePlace(int refer, int place) {
+		String sql = UPDATE_PLACE;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, refer);
+			pstmt.setInt(2, place);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
 }

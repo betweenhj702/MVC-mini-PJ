@@ -27,8 +27,33 @@ public class BoardQService {
 		dao.insert(boardq);
 	}
 
-	BoardQ showContentS(bq_seq){
+	public BoardQ showContentS(int bq_seq){
 		dao.updateCnt(bq_seq);
 		return dao.getContent(bq_seq);
+	}
+	public BoardQ showContentS(int bq_seq, String justFor){
+		return dao.getContent(bq_seq);
+	}
+	
+	public void deleteS(int bq_seq){
+		dao.delete(bq_seq);
+	}
+
+	public void updateS(BoardQ boardQ){
+		dao.update(boardQ);
+	}
+	public void rewriteS(String refStr, String levStr, String placeStr, String email, String subject, String content) {
+		//부모글(족,레벨,순번)
+		int refer = Integer.parseInt(refStr);
+		int lev = Integer.parseInt(levStr);
+		int place = Integer.parseInt(placeStr);
+		//자식글(족,레벨,순번)
+		int bq_refer = refer;
+		int bq_lev = lev + 1;
+		int bq_place = dao.getNewPLACE(bq_lev, place);
+		dao.updatePlace(refer, place);
+		
+		BoardQ boardQ = new BoardQ(-1, email, subject, content, null, 0, bq_refer, bq_lev, bq_place);
+		dao.insert(boardQ);
 	}
 }

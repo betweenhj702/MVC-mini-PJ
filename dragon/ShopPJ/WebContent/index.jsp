@@ -38,7 +38,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">로그인</a>
+            <a class="nav-link" href="login/login.jsp">로그인</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="member/join.jsp">회원가입</a>

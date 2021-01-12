@@ -85,4 +85,30 @@ public class MemberDAO {
 		    	}catch(SQLException se) {}
 		    }
 	    }
+	    Boolean edit(Member m){
+			Connection con = null;
+		    PreparedStatement pstmt = null;
+		    String sql = MemberSQL.EDIT;
+		    try {
+		    	con = ds.getConnection();
+		    	pstmt = con.prepareStatement(sql);
+		    	pstmt.setString(1, m.getM_name());
+		    	pstmt.setString(2, m.getM_phone());
+		    	pstmt.setString(3, m.getM_email());
+		    	pstmt.setString(4, m.getM_addr());
+		    	pstmt.setString(5, m.getM_addr2());
+
+		    	int i = pstmt.executeUpdate();
+		    	if(i>0) return true;
+				else return false;
+		    }catch(SQLException se) {
+		    	System.out.println(se);
+		    	return false;
+		    }finally {
+		    	try {
+		    		if(pstmt != null) pstmt.close();
+		    		if(con != null) con.close();
+		    	}catch(SQLException se) {}
+		    }
+		}
 	}

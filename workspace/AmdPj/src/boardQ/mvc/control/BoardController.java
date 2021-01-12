@@ -33,6 +33,16 @@ public class BoardController extends HttpServlet {
 				insert(request,response);
 			}else if(m.equals("content")){
 				showContent(request,response);
+			}else if(m.equals("moveUPage")){
+				moveUPage(request,response);
+			}else if(m.equals("update")){
+				update(request, response);
+			}else if(m.equals("delete")){
+				delete(request,response);
+			}else if(m.equals("moveRePage")){
+				moveRePage(request,response);
+			}else if(m.equals("rewrite")){
+				rewrite(request, response);
 			}else{
 				list(request, response);
 			}
@@ -61,31 +71,8 @@ public class BoardController extends HttpServlet {
 		}
 		session.setAttribute("cp", cp);
 		
-		int ps = 5;
-//		if(psStr == null) {
-//			Object psObj = session.getAttribute("ps");
-//			if(psObj != null) {
-//				ps = (Integer)psObj;
-//			}
-//		}else {
-//			psStr = psStr.trim();
-//			int psParam = Integer.parseInt(psStr);
-//			
-//			Object psObj = session.getAttribute("ps");
-//			if(psObj != null) {
-//				int psSession = (Integer)psObj;
-//				if(psSession != psParam) {
-//					cp = 1;
-//					session.setAttribute("cp", cp);
-//				}
-//			}else {
-//				if(ps != psParam) {
-//					cp = 1;
-//					session.setAttribute("cp", cp);
-//				}
-//			}
-//			ps = psParam;
-//		}
+		int ps = 20;
+
 		session.setAttribute("ps", ps);
 		
 		BoardQVO boardQVO = service.list(cp, ps);
@@ -116,7 +103,8 @@ public class BoardController extends HttpServlet {
 		service.insertS(boardq);
 		
 		//에러처리추가
-		String view = "list.jsp";
+		//입력한 글내용으로 이동 고치자
+		String view = "board_q.do";	
 		response.sendRedirect(view);
 	}
 	private void showContent(HttpServletRequest request, HttpServletResponse response) 
@@ -125,13 +113,87 @@ public class BoardController extends HttpServlet {
 		String seqStr = request.getParameter("seq");
 		bq_seq = check(seqStr);
 						
-		service.showContentS(bq_seq);
-
+		BoardQ boardQ = service.showContentS(bq_seq);
+		request.setAttribute("boardQ", boardQ);
 		String view = "content.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(view);
 		rd.forward(request, response);
 
 	}
+
+	private void moveUPage(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		String seqStr = request.getParameter("seq");
+		int bq_seq = check(seqStr);
+		
+		String justFor = "overloading";
+		BoardQ boardQ = service.showContentS(bq_seq, justFor);
+		request.setAttribute("boardQ", boardQ);
+
+		String view = "update.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(view);
+		rd.forward(request, response);
+	}
+	private void update(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		String seqStr = request.getParameter("seq");
+		int bq_seq = check(seqStr);
+		
+		String m_email = request.getParameter("email");
+		String bq_subject = request.getParameter("subject");
+		String bq_content = request.getParameter("content");
+		
+		BoardQ boardQ = new BoardQ(bq_seq, m_email, bq_subject, bq_content, null, -1,-1,-1,-1);
+		service.updateS(boardQ);
+		
+		String view = "board_q.do?m=content";
+		RequestDispatcher rd = request.getRequestDispatcher(view);
+		rd.forward(request, response);
+	}
+
+	private void delete(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		String seqStr = request.getParameter("seq");
+		int bq_seq = check(seqStr);
+		
+		service.deleteS(bq_seq);
+
+		String view = "board_q.do";
+		response.sendRedirect(view);
+	}
+	private void moveRePage(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		String ref = request.getParameter("ref");
+		String lev = request.getParameter("lev");
+		String place = request.getParameter("place");
+		
+		//System.out.println(ref+lev+place);
+		String view = "rewrite.jsp";
+		RequestDispatcher rd = request.getRequestDispatcher(view);
+		rd.forward(request, response);
+	}
+	
+	/////////////////////
+	private void rewrite(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		String email = request.getParameter("email");//로그인하면 email,name은 세션에서 자동으로 입력되게 할겅미
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		
+		String refStr = request.getParameter("ref");
+		String levStr = request.getParameter("lev");
+		String placeStr = request.getParameter("place");
+		
+		System.out.println(refStr+levStr+placeStr+email+subject+content);
+		
+		service.rewriteS(refStr, levStr, placeStr, email, subject, content);
+		
+		String view = "board_q.do";
+		response.sendRedirect(view);
+	}
+
+
+	//////////////////////
 	private int check(String seqStr){
 		if(seqStr != null){
 			seqStr = seqStr.trim();

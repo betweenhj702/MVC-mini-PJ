@@ -18,7 +18,7 @@ pageEncoding="UTF-8" import="amd.model.MemberService, amd.model.MemberSet"%>
 		String email = request.getParameter("email");
 		MemberService service = MemberService.getInstance();
 		int rCode = service.checkMember(email);
-		out.println("입력 ID : <strong>" + email + "</stong>"); 
+		out.println("입력 ID : <strong>" + email + "</stong>");
 		if(rCode== MemberSet.PASS){ 
 			out.println("<p>사용 가능한 아이디입니다.</p>"); 
 			out.println("<a href='javascript:apply(\"" + email + "\")'>[적용]</a>"); 

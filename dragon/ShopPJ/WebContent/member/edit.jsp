@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"import="amd.domain.Member"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +25,7 @@
   
   <script src="../js/trim.js"></script>
 <script language="javascript"> 
-
-	function check(){
+function check(){
 		var emailval = f.email.value;
 		emailval = trim(emailval);
 		if(emailval.length == 0){
@@ -119,24 +118,13 @@
 			}
 		}
 	}
-	function idCheck(){ //새창 만들기 
-		window.open("idCheckForm.jsp", "idwin", "width=500, height=500");
-		
-		var f=document.getElementById("email");
-		//f.readOnly = false;
-	}
-</script>
-
-	<script>
-	
-	function readOnly() {
-	   var f=document.getElementById("addr2");
-	   f.readOnly = false;
-	}
 	</script>
 	
-</head>
+	</head>
 
+<%
+	Member member = (Member)session.getAttribute("loginUser");	
+%>
 <body>
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -248,7 +236,7 @@
 
 					<div class="form-group row">
 						<div class="col-md-12">
-							<input type="button" value="Join"
+							<input type="button" value="Edit"
 								class="btn btn-primary py-3 px-5" onkeydown="check()"
 								onclick="check()"> 
                     </td>

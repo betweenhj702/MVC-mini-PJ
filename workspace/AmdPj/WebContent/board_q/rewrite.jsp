@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, amd.domain.BoardQ, boardQ.mvc.vo.BoardQVO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+
+
 <head>
 
   <meta charset="utf-8">
@@ -22,61 +24,11 @@
   <!-- Custom styles for this template -->
   <link href="../css/clean-blog.min.css" rel="stylesheet">
 
-	<script src="../js/check.js"></script>
-	<script language="javascript">
-	   function check()
-	   {
-	       for(var i=0; i<document.input.elements.length; i++)
-		   {
-		      var inputElem = document.input.elements[i]
-			  if(inputElem.value == "")
-			  {
-			     alert("모든 값을 입력 하셔야 합니다. ");
-				 return false;
-			  }
-		   }
-			var writerval = input.writer.value;
-			writerval = trim(writerval);
-			pass = checkByteLen(writerval, 80);
-			if(!pass){
-				alert("제한");
-				input.writer.focus();
-				return false;
-			}
-			var emailval = input.email.value;
-			emailval = trim(emailval);
-			pass = checkByteLen(emailval, 80);
-			if(!pass){
-				alert("제한");
-				input.email.focus();
-				return false;
-			}
-			var subjectval = input.subject.value;
-			subjectval = trim(subjectval);
-			pass = checkByteLen(subjectval, 60);
-			if(!pass){
-				alert("제목 ");
-				input.subject.focus();
-				return false;
-			}
-			var contentval = input.content.value;
-			contentval = trim(contentval);
-			pass = checkByteLen(contentval, 500);
-			if(!pass){
-				alert("글 ");
-				input.writer.focus();
-				return false;
-			}
-		   document.input.submit();
-       }
-	</script>
-
-
 </head>
 
 <body>
 
-   <!-- Navigation -->
+  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="../index.do">아몬드</a>
@@ -114,14 +66,16 @@
 	  <a class="navbar-brand" href="board_q.do">Q&A게시판</a>
      </div>
   </header>
-  
 
   <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <form name="input" method="post" action="board_q.do?m=insert">
-			글작성<br/><br/>
+        <form name="input" method="post" action="board_q.do?m=rewrite">
+			<input type="hidden" name="ref" value="${param.ref}">
+			<input type="hidden" name="lev" value="${param.lev}">
+			<input type="hidden" name="place" value="${param.place}">
+			답글작성<br/><br/>
 			<table class="table table-striped table-hover">
 			  <tr>
 				 <td width="10%" align="center">WRITER</td>
@@ -140,9 +94,9 @@
 				 <td><textarea  name="content" rows="5" class="form-control"></textarea></td>
 			  </tr>
 			</table>
-			<div align='right'>            
+			<div align='right'>     
 				<a href="board_q.do" class="btn btn-success">목록</a>
-				<input type="button" value="작성" class="btn btn-success" onclick="check()">
+				<input type="submit" value="작성" class="btn btn-success" >
 				<input type="reset" value="다시작성" class="btn btn-success" onclick="input.subject.focus()">
 			</div>
 		</form>
