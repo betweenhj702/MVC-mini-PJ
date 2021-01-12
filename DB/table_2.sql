@@ -19,6 +19,8 @@ create table ORD(
        O_SEQ number constraint ORD_PK primary key,
        C_SEQ number not null,
        O_ODATE date not null,
+       O_MSG varchar2(100),
+       O_VALID varchar2(2),
        constraint ORD_FK foreign key(C_SEQ) references CART(C_SEQ)
     );
 
