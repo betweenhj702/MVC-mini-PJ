@@ -39,10 +39,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">로그인</a>
+            <c:choose>
+          	<c:when test="${empty loginUser}"><a class="nav-link" href="../login/login.do?m=form">로그인</a></c:when>
+          	<c:otherwise><a class="nav-link" href="../login/login.do?m=out">로그아웃</a></c:otherwise>
+          	</c:choose>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">회원가입</a>
+            <c:choose>
+          	<c:when test="${empty loginUser}"> <a class="nav-link" href="../member/member.do?m=form">회원가입</a></c:when>
+          	<c:otherwise> <a class="nav-link" href="../member/member.do?m=form">회원정보</a></c:otherwise>
+          	</c:choose>
           </li>
         </ul>
       </div>
@@ -61,9 +67,11 @@
       </div>
     </div>
 	<div class="container">
-      <a class="navbar-brand" href="index.html">상품</a>
-	  <a class="navbar-brand" href="index.html">공지게시판</a>
-	  <a class="navbar-brand" href="board_q.do">Q&A게시판</a>
+	  <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
+      <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
+      <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
+	  <a class="navbar-brand" href="">공지게시판</a>
+	  <strong><a class="navbar-brand" href="board_q.do">Q&A게시판</a></strong>
      </div>
   </header>
 
@@ -95,11 +103,18 @@
 			</tr>
         </table>
 		<div align='right'>  
-		    <a href="board_q.do" class="btn btn-success">목록</a> 
-			<a href="board_q.do?m=moveUPage&seq=${boardQ.bq_seq}" class="btn btn-success">수정</a>
-			<a href="board_q.do?m=delete&seq=${boardQ.bq_seq}" class="btn btn-success">삭제</a>
-			<a href="board_q.do?m=moveRePage&seq=${boardQ.bq_seq}&ref=${boardQ.bq_refer}&lev=${boardQ.bq_lev}&place=${boardQ.bq_lev}"	class="btn btn-success">
-				답글</a>
+		    <a href="board_q.do" class="btn btn-success">목록</a>
+			<c:choose>
+				<c:when test="${empty loginUser}"></c:when>
+				<c:when test="${loginUser==boardQ.m_email}">
+					<a href="board_q.do?m=moveUPage&seq=${boardQ.bq_seq}" class="btn btn-success">수정</a>
+					<a href="board_q.do?m=delete&seq=${boardQ.bq_seq}" class="btn btn-success">삭제</a>
+				</c:when>
+				<c:otherwise>
+					<a href="board_q.do?m=moveRePage&seq=${boardQ.bq_seq}&ref=${boardQ.bq_refer}&lev=${boardQ.bq_lev}&place=${boardQ.bq_lev}"	class="btn btn-success">
+					답글</a>
+				</c:otherwise>
+			</c:choose>
         </div>
 	  </div>
     </div>
