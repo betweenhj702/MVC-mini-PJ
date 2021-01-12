@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -38,10 +39,16 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login/login.do?m=form">로그인</a>
+          	<c:choose>
+          	<c:when test="${empty loginUser}"><a class="nav-link" href="login/login.do?m=form">로그인</a></c:when>
+          	<c:otherwise><a class="nav-link" href="login/login.do?m=form">로그아웃</a></c:otherwise>
+          	</c:choose>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="member/member.do?m=form">회원가입</a>
+          	<c:choose>
+          	<c:when test="${empty loginUser}"> <a class="nav-link" href="member/member.do?m=form">회원가입</a></c:when>
+          	<c:otherwise> <a class="nav-link" href="member/member.do?m=form">회원정보</a></c:otherwise>
+          	</c:choose>
           </li>
         </ul>
       </div>
@@ -61,7 +68,7 @@
     </div>
 	<div class="container">
       <a class="navbar-brand" href="product/product.do">상품</a>
-	  <a class="navbar-brand" href="index.html">공지게시판</a>
+	  <a class="navbar-brand" href="">공지게시판</a>
 	  <a class="navbar-brand" href="board_q/board_q.do">Q&A게시판</a>
      </div>
   </header>
