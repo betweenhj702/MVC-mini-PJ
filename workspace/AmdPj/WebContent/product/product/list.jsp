@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8"
+    import="java.util.*, amd.domain.Product, product.mvc.vo.ListResult"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
 
 <head>
 
@@ -22,6 +22,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
+  
 
 </head>
 
@@ -30,7 +31,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.do">아몬드</a>
+      <a class="navbar-brand" href="index.html">아몬드</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -38,10 +39,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login/login.do?m=form">로그인</a>
+            <a class="nav-link" href="index.html">로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="member/member.do?m=form">회원가입</a>
+            <a class="nav-link" href="about.html">회원가입</a>
           </li>
         </ul>
       </div>
@@ -60,26 +61,58 @@
       </div>
     </div>
 	<div class="container">
-      <a class="navbar-brand" href="product/product.do">상품</a>
+      <strong><a class="navbar-brand" href="product.do?cp=1&ps=16">전체 상품</a></strong>
+      <a class="navbar-brand" href="product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
+      <a class="navbar-brand" href="product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
 	  <a class="navbar-brand" href="index.html">공지게시판</a>
-	  <a class="navbar-brand" href="board_q/board_q.do">Q&A게시판</a>
+	  <a class="navbar-brand" href="index.html">Q&A게시판</a>
      </div>
   </header>
   
 
   <!-- Main Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
-      </div>
+  <div style="text-align:center;font-size:1.5em;font-family:'Nanum Gothic'">
+	<strong>전체 상품</strong>
+</div><br/>
+	<div class="container">
+        <div class="row">
+ 	 <c:forEach items="${listResult.list}" var="list">
+          <div class="col-lg-3 col-md-4 mb-4">
+            <div class="card" style="margin:0 auto;float: none;">
+              <a href="product.do?m=detail&p_code=${list.p_code}"><img class="card-img-top" src="img/${list.p_img}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="product.do?m=detail&p_code=${list.p_code}">${list.p_name}</a>
+                </h4>
+                <h5>${list.p_price}원</h5>
+              </div>
+            </div>
+          </div>
+          </c:forEach>
+           </div>
+          </div>
+        <hr width='600' size='2' color='gray' noshade>
+	<font color='gray' size='3' face='휴먼편지체'>
+	<div style="text-align:center;font-size:1em;font-family:'Nanum Gothic'">
+    (총 페이지수 : ${listResult.totalPageCount} )
+    &nbsp;
+    <c:forEach begin="1" end="${listResult.totalPageCount}" var="i">
+        <a href="product.do?cp=${i}">
+           <c:choose>
+               <c:when test="${i==listResult.currentPage}">
+                  <strong>${i}</strong>
+               </c:when>
+	           <c:otherwise>
+	              ${i}
+	           </c:otherwise>
+           </c:choose>
+        </a>&nbsp;
+    </c:forEach>
+    ( TOTAL : ${listResult.totalCount} )
     </div>
-  </div>
-
-  <hr>
-
+    
+</font>
+<hr width='600' size='2' color='gray' noshade>
   <!-- Footer -->
   <footer>
     <div class="container">

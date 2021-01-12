@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
@@ -30,7 +28,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.do">아몬드</a>
+      <a class="navbar-brand" href="index.html">아몬드</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -38,10 +36,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login/login.do?m=form">로그인</a>
+            <a class="nav-link" href="index.html">로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="member/member.do?m=form">회원가입</a>
+            <a class="nav-link" href="about.html">회원가입</a>
           </li>
         </ul>
       </div>
@@ -60,9 +58,9 @@
       </div>
     </div>
 	<div class="container">
-      <a class="navbar-brand" href="product/product.do">상품</a>
+      <a class="navbar-brand" href="index.html">상품</a>
 	  <a class="navbar-brand" href="index.html">공지게시판</a>
-	  <a class="navbar-brand" href="board_q/board_q.do">Q&A게시판</a>
+	  <a class="navbar-brand" href="index.html">Q&A게시판</a>
      </div>
   </header>
   
@@ -71,10 +69,98 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
-      </div>
+	 <style type="text/css">
+        table{
+            margin-left:auto; 
+            margin-right:auto;
+            border:3px solid skyblue;
+        }
+        
+        td{
+            border:1px solid skyblue
+        }
+        
+        #title{
+            background-color:skyblue
+        }
+    </style>
+    
+    <script type="text/javascript">
+    
+        function changeForm(val){
+            if(val == "-1"){
+                location.href="MainForm.jsp";
+            }else if(val == "0"){
+                location.href="MainForm.jsp?contentPage=member/view/ModifyFrom.jsp";
+            }else if(val == "1"){
+                location.href="MainForm.jsp?contentPage=member/view/DeleteForm.jsp";
+            }
+        }
+        
+    </script>
+    
+</head>
+<body>
+
+ 
+        <br><br>
+        <b><font size="6" color="gray">내 정보</font></b>
+        <br><br><br>
+                        <!-- 가져온 회원정보를 출력한다. -->
+        <table>
+            <tr>
+                <td id="title">아이디</td>
+                <td></td>
+            </tr>
+                        
+            <tr>
+                <td id="title">비밀번호</td>
+                <td></td>
+            </tr>
+                    
+            <tr>
+                <td id="title">이름</td>
+                <td></td>
+            </tr>
+                    
+            <tr>
+                <td id="title">성별</td>
+                <td></td>
+            </tr>
+                    
+            <tr>
+                <td id="title">생일</td>
+                <td>
+                    
+                </td>
+            </tr>
+                    
+            <tr>
+                <td id="title">이메일</td>
+                <td>
+                    <%=memberBean.getMail1() %>@
+                    <%=memberBean.getMail2() %>
+                </td>
+            </tr>
+                    
+            <tr>
+                <td id="title">휴대전화</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td id="title">주소</td>
+                <td>
+                    
+                </td>
+            </tr>
+        </table>
+        
+        <br>
+        <input type="button" value="뒤로" onclick="changeForm(-1)">
+        <input type="button" value="회원정보 변경" onclick="changeForm(0)">
+        <input type="button" value="회원탈퇴" onclick="changeForm(1)">
+
+	  </div>
     </div>
   </div>
 
