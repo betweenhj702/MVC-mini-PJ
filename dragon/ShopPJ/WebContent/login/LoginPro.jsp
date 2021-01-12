@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
-pageEncoding="UTF-8" import="amd.model.LoginDAO;"%>
+pageEncoding="UTF-8" import="amd.login.model.LoginDAO;"%>
 
 <!DOCTYPE html>
 <html>

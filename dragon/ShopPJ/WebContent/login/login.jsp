@@ -42,8 +42,7 @@
                 return false;
             }
         }
-        f.submit();
-	}
+
 	function checkByteLen(str, size){
 	    var byteLen = getByteLen(str);
 		if(byteLen <= size){
@@ -67,7 +66,7 @@
     
         // 회원가입 버튼 클릭시 회원가입 화면으로 이동
         function goJoinForm() {
-            location.href="join.jsp";
+            location.href="../member/join.jsp";
         }    
     </script>
 </head>
@@ -76,7 +75,7 @@
  <!-- Navigation -->
  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.jsp">아몬드</a>
+      <a class="navbar-brand" href="../index.jsp">아몬드</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -87,7 +86,7 @@
             <a class="nav-link" href="login.jsp">로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="join.jsp">회원가입</a>
+            <a class="nav-link" href="../member/join.jsp">회원가입</a>
           </li>
         </ul>
       </div>
@@ -118,7 +117,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
 	    <div id="wrap">
-        <form name="loginInfo" method="post" action="../LoginPro.jsp" 
+        <form name="f" method="post" action="login.do?m=check" 
                 onsubmit="return checkValue()">
         		<h1>로그인</h1><br>
             <table>

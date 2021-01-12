@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import amd.model.LoginService;
-import amd.model.LoginSet;
+import amd.login.model.LoginService;
+import amd.login.model.LoginSet;
 import amd.domain.Member;
 
 @WebServlet("/login/login.do")
@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 		//session.removeAttribute("loginUser");
 		session.invalidate();
 		
-		String view = "../index.do";
+		String view = "../index.jsp";
 		response.sendRedirect(view);
 	}
 }

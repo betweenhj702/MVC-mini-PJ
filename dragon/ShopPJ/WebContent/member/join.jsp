@@ -141,7 +141,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.jsp">아몬드</a>
+      <a class="navbar-brand" href="../index.jsp">아몬드</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -149,7 +149,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">로그인</a>
+            <a class="nav-link" href="../login/login.jsp">로그인</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="join.jsp">회원가입</a>
