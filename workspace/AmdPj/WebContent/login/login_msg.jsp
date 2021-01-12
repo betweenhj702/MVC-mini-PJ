@@ -12,5 +12,4 @@
 		alert("${loginUser.m_name}님 하이~! 로그인 성공");
 		location.href="../index.jsp";
 	}
-	
 </script>
