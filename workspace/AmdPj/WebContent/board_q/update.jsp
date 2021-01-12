@@ -72,6 +72,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <form name="input" method="post" action="board_q.do?m=update">
+			글수정<br/><br/>
 			<input type="hidden" name="seq" value="${boardQ.bq_seq}">
 			<table class="table table-striped table-hover">
 			  <tr>
@@ -88,12 +89,12 @@
 			  </tr>
 			  <tr>
 				 <td align="center">CONTENT</td>
-				 <td><textarea  name="content" rows="5" value="${boardQ.bq_content}" class="form-control"> </textarea></td>
+				 <td><textarea  name="content" rows="5" class="form-control">${boardQ.bq_content} </textarea></td>
 			  </tr>
 			</table>
 			<div align='right'>            
 				<a href="board_q.do" class="btn btn-success">목록</a>
-				<input type="button" value="작성" class="btn btn-success">
+				<input type="submit" value="작성" class="btn btn-success">
 				<input type="reset" value="다시작성" class="btn btn-success" onclick="input.subject.focus()">
 			</div>
 		</form>

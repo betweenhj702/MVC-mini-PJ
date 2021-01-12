@@ -254,5 +254,48 @@ class BoardQDAO {
 			}
 		}
 	}
-
+	////답글작업
+	int getNewPLACE(int bq_lev, int place) {
+		String sql = MAX_PLACE;
+		ResultSet rs = null;
+		int newPlace = place + 1;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bq_lev);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				newPlace = 1 + rs.getInt(1);
+			}
+			return newPlace;
+		}catch(SQLException se) {
+			System.out.println(se);
+			return -1;
+		}finally{
+			try{
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+	void updatePlace(int refer, int place) {
+		String sql = UPDATE_PLACE;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, refer);
+			pstmt.setInt(2, place);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
 }

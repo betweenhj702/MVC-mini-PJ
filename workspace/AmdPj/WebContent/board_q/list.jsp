@@ -75,10 +75,10 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th width='10%'>번호</th>
-                    <th width='15%'>작성자</th>
-					<th width='25%'>이메일</th>
-                    <th width='30%'>제목</th>
+                    <th width='5%'>NO</th>
+                    <th width='10%'>작성자</th>
+					<th width='20%'>이메일</th>
+                    <th width='45%'>제목</th>
                     <th width='10%'>날짜</th>
                     <th width='10%'>조회수</th>
                 </tr>
@@ -95,7 +95,11 @@
                         <td>${boardQ.m_name}</td>
                         <td>${boardQ.m_email}</td>
                         <td>
+                        	<c:forEach begin="1" end="${boardQ.bq_lev}">
+									&nbsp;&nbsp;&nbsp;
+							</c:forEach>
 							<a href="board_q.do?m=content&seq=${boardQ.bq_seq}" >
+								<c:if test="${boardQ.bq_lev > 0}"> <img src="img/icon_bbs_answer.gif">Re:</c:if>
 								${boardQ.bq_subject}
 							</a>
 						</td>

@@ -121,6 +121,7 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <form name="input" method="post" action="board_q.do?m=insert">
+			글작성<br/><br/>
 			<table class="table table-striped table-hover">
 			  <tr>
 				 <td width="10%" align="center">WRITER</td>

@@ -94,12 +94,11 @@
 				<td colspan='3'>${boardQ.bq_content}</td>
 			</tr>
         </table>
-		<div align='right'>            
-            <a href="board_q.do" class="btn btn-success">목록</a> 
+		<div align='right'>  
+		    <a href="board_q.do" class="btn btn-success">목록</a> 
 			<a href="board_q.do?m=moveUPage&seq=${boardQ.bq_seq}" class="btn btn-success">수정</a>
 			<a href="board_q.do?m=delete&seq=${boardQ.bq_seq}" class="btn btn-success">삭제</a>
-			<a href="board_q.do?m=moveRePage&seq=${boardQ.bq_seq}&ref=${boardQ.bq_refer}
-				&lev=${boardQ.bq_lev}&place=${boardQ.bq_place}"	class="btn btn-success">
+			<a href="board_q.do?m=moveRePage&seq=${boardQ.bq_seq}&ref=${boardQ.bq_refer}&lev=${boardQ.bq_lev}&place=${boardQ.bq_lev}"	class="btn btn-success">
 				답글</a>
         </div>
 	  </div>
