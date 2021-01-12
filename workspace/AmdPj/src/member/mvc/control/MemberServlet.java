@@ -84,7 +84,8 @@ import member.mvc.model.MemberSet;
 	    	member.setM_pwd("");
 	    	HttpSession session = request.getSession();
 		    session.setAttribute("member", member);
-		    response.sendRedirect("member.do?m=welcome.jsp");
+		    String view = "welcome.jsp";
+			response.sendRedirect(view);
 	    }else {
 	    	System.out.println("회원가입 실패");
 	    }
