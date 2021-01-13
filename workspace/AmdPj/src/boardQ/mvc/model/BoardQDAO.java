@@ -55,7 +55,6 @@ class BoardQDAO {
 			}
 			return list;
 		}catch(SQLException se) {
-			System.out.println("1");
 			System.out.println(se);
 			return null;
 		}finally {
