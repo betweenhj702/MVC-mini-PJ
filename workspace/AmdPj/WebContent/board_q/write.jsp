@@ -87,10 +87,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">로그인</a>
+            <a class="nav-link" href="../login/login.do?m=out">로그아웃</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">회원가입</a>
+			<a class="nav-link" href="../member/member.do?m=form">회원정보</a>
           </li>
         </ul>
       </div>
@@ -109,9 +109,11 @@
       </div>
     </div>
 	<div class="container">
-      <a class="navbar-brand" href="index.html">상품</a>
-	  <a class="navbar-brand" href="index.html">공지게시판</a>
-	  <a class="navbar-brand" href="board_q.do">Q&A게시판</a>
+      <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
+      <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
+      <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
+	  <a class="navbar-brand" href="">공지게시판</a>
+	  <strong><a class="navbar-brand" href="board_q.do">Q&A게시판</a></strong>
      </div>
   </header>
   
@@ -125,11 +127,11 @@
 			<table class="table table-striped table-hover">
 			  <tr>
 				 <td width="10%" align="center">WRITER</td>
-				 <td><input type="text" name="writer" class="form-control" ></td>
+				 <td><input type="text" name="writer" class="form-control" value="${loginUser.m_name}" readonly></td>
 			  </tr>
 			  <tr>
 				 <td align="center">EMAIL</td>
-				 <td><input type="text" name="email" class="form-control"></td>
+				 <td><input type="text" name="email" class="form-control" value="${loginUser.m_email}" readonly></td>
 			  </tr>
 			  <tr>
 				 <td align="center">SUBJECT</td>
