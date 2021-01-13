@@ -98,7 +98,7 @@
 			</table>
 		</div>
 		<div class="col-lg-8 col-md-10 mx-auto">
-			주문자 정보<br/><br/>
+			<br/><br/>주문자 정보<br/><br/>
 			<table class="table table-striped table-hover">
 				<tr>
 					<td width='20%' align='center'>이름</td>
@@ -120,22 +120,22 @@
 		</div>
 		<div class="col-lg-8 col-md-10 mx-auto">
 			<form name="input" method="post" action="board_q.do?m=insert">
-			<br/><br/>주문자정보<br/><br/>
+			배송지정보입력<br/><br/>
 			<table class="table table-striped table-hover">
 			  <tr>
-				 <td width="10%" align="center">이름</td>
-				 <td><input type="text" name="writer" class="form-control" value="${loginUser.m_name}" readonly></td>
+				 <td width="10%" align="center">수령인</td>
+				 <td><input type="text" name="writer" class="form-control" value="${loginUser.m_name}" ></td>
 			  </tr>
 			  <tr>
-				 <td align="center">EMAIL</td>
-				 <td><input type="text" name="email" class="form-control" value="${loginUser.m_email}" readonly></td>
+				 <td align="center">연락처</td>
+				 <td><input type="text" name="email" class="form-control" value="${loginUser.m_email}" ></td>
 			  </tr>
 			  <tr>
-				 <td align="center">SUBJECT</td>
+				 <td align="center">배송지 주소</td>
 				 <td><input type="text" name="subject" class="form-control"></td>
 			  </tr>
 			  <tr>
-				 <td align="center">CONTENT</td>
+				 <td align="center">메세지</td>
 				 <td><textarea  name="content" rows="5" class="form-control"></textarea></td>
 			  </tr>
 			</table>
