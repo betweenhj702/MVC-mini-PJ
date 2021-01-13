@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"import="amd.domain.Member"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" import="amd.domain.Member"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,19 +58,19 @@ function check(){
 			}
 		}
 		
-		var pwdcheck = f.pwdcheck.value;
-		pwdcheck = trim(pwdcheck);
-		if(pwdcheck.length == 0){
+		var newPwd = f.newPwd.value;
+		newPwd = trim(newPwd);
+		if(newPwd.length == 0){
 			alert("비밀번호 확인란을 입력하세요.");
-			f.pwdcheck.value = "";
-			f.pwdcheck.focus();
+			f.newPwd.value = "";
+			f.newPwd.focus();
 			return false;
 		}
 		
-		if(pwdcheck!=pwdval){
+		/* if(pwdcheck!=pwdval){
 			alert("비밀번호 입력이 일치하지 않습니다.");
 			return false;
-		}
+		} */
 		
 		var nameval = f.name.value;
 		nameval = trim(nameval);
@@ -129,7 +129,7 @@ function check(){
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.jsp">아몬드</a>
+      <a class="navbar-brand" href="../index.jsp">아몬드</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -137,7 +137,7 @@ function check(){
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">로그인</a>
+            <a class="nav-link" href="../login/login.do?m=form">로그인</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="member/member.do?m=form">회원가입</a>
@@ -168,80 +168,74 @@ function check(){
 
   <!-- Main Content -->
   <div class="site-wrap">
-	s<div class="site-section bg-light">
+	<div class="site-section bg-light">
   <div class="container">
     <div class="row">
       <div class="col-md-6 mb-5 mb-md-0">
-      <h2 class="h3 mb-3 text-black font-heading-serif">JOIN</h2>
+      <h2 class="h3 mb-3 text-black font-heading-serif">회원정보</h2>
 						<div class="p-3 p-lg-5 ">
 <body>
     <!-- div 왼쪽, 오른쪽 바깥여백을 auto로 주면 중앙정렬된다.  -->
     <div id="wrap">
         <br><br>
-        <b><font size="6" color="gray">회원가입</font></b>
+        <b><font size="6" color="gray">정보 변경</font></b>
         <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
         <!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
-        <form method="post" action="member.do?m=join" name="f" onsubmit="return checkValue()">
+        <form name="f" action="member.do?m=update" method="post">
         <div class="form-group row">
 		<div class="col-md-12">
-		<table>
-               <label for="id" class="text-black">아이디<span
-				class="text-danger">*</span></label> <input readOnly
-				class="form-control" id="email" name="email"
-				placeholder="exemple@exemple.com">
-				</div>
-				<div class="form-group">
-					<input type="button" value="ID 중복확인" onclick="idCheck()">
+               <label for="email" class="text-black">아이디</label>
+               <input readOnly class="form-control"  id="email" name="email" value="<%=member.getM_email()%>">
+				
 				</div>
 			</div>     
+			
                 <div class="form-group row">
 				<div class="col-md-12">
-					<label for="pwd" class="text-black">비밀번호 <span
+					<label for="pwd" class="text-black">기존 비밀번호 <span
 						class="text-danger">*</span></label> <input class="form-control"
 						id="pwd" name="pwd" type="password"
 						placeholder="****">
 				</div>
 			</div>
-				
-                <div class="form-group row">
+			
+			<div class="form-group row">
 				<div class="col-md-12">
-					<label for="pwdcheck" class="text-black">비밀번호 확인 <span
+					<label for="pwdcheck" class="text-black">새로운 비밀번호 <span
 						class="text-danger">*</span></label> <input class="form-control"
-						id="pwdcheck" name="pwdcheck" type="password">
+						id="pwdcheck" name="newPwd" type="password">
 				</div>
 			</div>
                     
                 <div class="form-group row">
 					<div class="col-md-6">
-						<label for="name" class="text-black">이름 <span
-							class="text-danger">*</span></label> <input class="form-control"
-							id="name" name="name">
+				  <label for="c_state_country" class="text-black">이름 <span class="text-danger">*</span></label>
+                  <input class="form-control" id="name" name="name" value="<%=member.getM_name()%>">
 					</div>
                     
                 <div class="col-md-6">
-					<label for="phone" class="text-black">전화번호 </label> <input
-						type="text" class="form-control" name="phone"
-						placeholder="- 없이">
+				  <label for="c_phone" class="text-black">전화번호 </label>
+                  <input type="text" class="form-control" name="phone" value="<%=member.getM_phone()%>">
 				</div>
 			</div>
                 <div class="form-group row">
 					<div class="col-md-12">
 						<label for="addr" class="text-black">주소 </label> <input
-						type="text" class="form-control" name="addr"
+						type="text" class="form-control" name="addr" value="<%=member.getM_addr()%>"
 						placeholder="도로명"> 
-						<input type="text" class="form-control" name="addr2"
+						<input type="text" class="form-control" name="addr2" value="<%=member.getM_addr2()%>"
 						placeholder="상세주소">
 					</div>
 				</div>
 
 					<div class="form-group row">
 						<div class="col-md-12">
-							<input type="button" value="Edit"
+							<input type="button" value="update"
 								class="btn btn-primary py-3 px-5" onkeydown="check()"
 								onclick="check()"> 
                     </td>
                 </tr>
-            </table>
+            
             <br>
         </form>
     </div>

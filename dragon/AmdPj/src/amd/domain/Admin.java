@@ -1,7 +1,7 @@
 package amd.domain;
 
 public class Admin {
-	private static String admin = "sb11";
+	private static String admin = "admin";
 
 	
 	public Admin() {

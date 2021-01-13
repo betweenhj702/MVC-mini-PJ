@@ -30,6 +30,9 @@ import member.mvc.model.MemberSet;
 				case "form": form(request, response); break;
 				case "check": check(request, response); break;
 				case "join": join(request, response); break;
+				case "edit": edit(request, response); break;
+				case "goUpdate": goUpdate(request, response); break;
+				case "update": update(request, response); break;
 	
 				default: response.sendRedirect("../index.jsp");
 			}
@@ -51,8 +54,7 @@ import member.mvc.model.MemberSet;
 	    request.setAttribute("rCode", rCode);
 	    if(rCode==MemberSet.PASS) {
 	    	HttpSession session = request.getSession();
-	    	//Member m = service.getMemberS(id);
-	    	session.setAttribute("id", email);
+	    	session.setAttribute("email", email);
 	    }
 	    
 	    String referer = request.getHeader("Referer");
@@ -84,7 +86,7 @@ import member.mvc.model.MemberSet;
 	    	member.setM_pwd("");
 	    	HttpSession session = request.getSession();
 		    session.setAttribute("member", member);
-		    String view = "welcome.jsp";
+		    String view = "../login/login.jsp";
 			response.sendRedirect(view);
 	    }else {
 	    	System.out.println("회원가입 실패");
@@ -92,7 +94,7 @@ import member.mvc.model.MemberSet;
 	}
 	private void welcome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String view = "welcome.jsp";
+		String view = "../login/login.jsp";
 		response.sendRedirect(view);
 	}
 	private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -125,33 +127,26 @@ import member.mvc.model.MemberSet;
 	private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Boolean upCode = false; // update 성공여부
 		
-		String id = request.getParameter("id");
-	    String pwd = request.getParameter("pwdcheck"); // 비번확인란
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("pwd");
+	    String newpwd = request.getParameter("newPwd"); // 비번확인란
 	    String name = request.getParameter("name");
-	    String birthStr = request.getParameter("birth");
-	    String email = request.getParameter("email");
 	    String phone = request.getParameter("phone");
 	    String addr = request.getParameter("addr");
 	    String addr2 = request.getParameter("addr2");
-	    if(id != null) id = id.trim();
+	    System.out.println(email+pwd);
+	    if(email != null) email = email.trim();
 	    if(pwd != null) pwd = pwd.trim();
 	    if(name != null) name = name.trim();
-	    if(birthStr != null) birthStr = birthStr.trim();
-	    if(email != null) email = email.trim();
 	    if(phone != null) phone = phone.trim();
 	    if(addr != null) addr = addr.trim();
 	    if(addr2 != null) addr2 = addr2.trim();
 	    
-	    Date birth = null;
-	    try {
-		    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		    java.util.Date utilBirthStr = dateFormat.parse(birthStr);
-		    birth = new java.sql.Date(utilBirthStr.getTime());
-	    }catch(ParseException pe) {}
-	    System.out.println(id+ "&"+pwd);
+	    System.out.println(email+ "&"+pwd);
 	    MemberService service = MemberService.getInstance();
-	    if(service.checkPwd(id, pwd) == MemberSet.YES_ID) {
-		    Member member = new Member(email, pwd, name, phone, addr, addr2, null);
+	    if(service.checkPwd(email, pwd) == MemberSet.YES_ID) {
+	    	System.out.println(1);
+		    Member member = new Member(email, newpwd, name, phone, addr, addr2, null);
 		    upCode = service.edit(member);
 	
 	    	HttpSession session = request.getSession();

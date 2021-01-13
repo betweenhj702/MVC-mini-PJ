@@ -5,9 +5,7 @@
     <c:redirect url="product.do"/>
 </c:if>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <!------ Include the above in your HEAD tag ---------->
 <!DOCTYPE html>
 
@@ -21,15 +19,15 @@
   <title>HBAF</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="css/clean-blog.min.css" rel="stylesheet">
+  <link href="../css/clean-blog.min.css" rel="stylesheet">
   
 
 </head>
@@ -47,10 +45,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">로그인</a>
+            <a class="nav-link" href="login/login.do">로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">회원가입</a>
+            <a class="nav-link" href="member/member.do">회원가입</a>
           </li>
         </ul>
       </div>

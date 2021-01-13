@@ -50,7 +50,6 @@ public class LoginServlet extends HttpServlet {
 	    request.setAttribute("rCode", rCode);
 	    
 	    if(rCode == LoginSet.PASS) {
-	    	
 	    	Member m = service.getMemberS(email);
 	    	session.setAttribute("loginUser", m);
 	    }
