@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html;charset=utf-8" import="login.mvc.model.LoginSet, amd.domain.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,8 +9,7 @@
 		alert("로그인 실패 ( 잘못된 비번 )");
 		location.href="login.do";
 	}else{
-		alert("${loginUser.m_name}님 로그인 성공");
+		alert("${loginUser.m_name}님 쿠폰 지급 완료되었습니다!");
 		location.href="../index.jsp";
 	}
-	
 </script>
