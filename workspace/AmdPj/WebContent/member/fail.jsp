@@ -3,9 +3,9 @@
 
 <script language="javascript">
 	if(${uCode}){
-		location.href="member.do?m=welcome";
+		location.href="member.do?m=goUpdate";
 	}else{
-		alert("회원가입을 축하드립니다.");
+		alert("로그인 후에 사용 가능합니다.");
 		location.href="../login/login.do?m=form";
 	}
 </script>

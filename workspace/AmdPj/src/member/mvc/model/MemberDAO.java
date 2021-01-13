@@ -93,11 +93,12 @@ public class MemberDAO {
 		    	con = ds.getConnection();
 		    	pstmt = con.prepareStatement(sql);
 		    	pstmt.setString(1, m.getM_name());
-		    	pstmt.setString(2, m.getM_phone());
-		    	pstmt.setString(3, m.getM_email());
+		    	pstmt.setString(2, m.getM_pwd());
+		    	pstmt.setString(3, m.getM_phone());
 		    	pstmt.setString(4, m.getM_addr());
 		    	pstmt.setString(5, m.getM_addr2());
-
+		    	pstmt.setString(6, m.getM_email());
+		    	System.out.println(1);
 		    	int i = pstmt.executeUpdate();
 		    	if(i>0) return true;
 				else return false;
