@@ -12,8 +12,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+
+
 import amd.domain.Cart;
 import amd.domain.Member;
+import amd.domain.Ord;
 import amd.domain.Product;
 import static order.mvc.model.OrderSQL.*;
 
@@ -80,16 +83,13 @@ class OrderDAO {
 			pstmt.setString(2, c_valid);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
+				int c_seq = rs.getInt("C_SEQ");
+				int c_amount = rs.getInt("C_AMOUNT");
 				int p_code = rs.getInt("P_CODE");
-				String p_type = rs.getString("P_TYPE");
-				String p_name = rs.getString("P_NAME");
-				int p_price = rs.getInt("P_PRICE");
-				String p_img = rs.getString("P_IMG");
-				String p_info = rs.getString("P_INFO");
-				Cart cart = new Product(p_code, p_type, p_name, p_price, p_img, p_info);
+				Cart cart = new Cart(c_seq, m_email, p_code, null, -1, null, c_amount, c_valid);
 				listC.add(cart);
 			}
-			return listP;
+			return listC;
 		}catch(SQLException se) {
 			System.out.println(se);
 			return null;
@@ -103,12 +103,55 @@ class OrderDAO {
 		}
 	}
 	
-	Member showOrderer() {
-		return null;
+	Member showOrderer(String m_email) {
+		String sql = INFO_MEMBER;
+		ResultSet rs = null;
+		Member member= null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_email);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				String m_name  = rs.getString("M_NAME");
+				String m_phone = rs.getString("M_PHONE");
+				String m_addr = rs.getString("M_ADDR");
+				member = new Member(m_email, null, m_name, m_phone, m_addr, null, "n");
+			}
+			return member;
+		}catch(SQLException se) {
+			System.out.println(se);
+			return null;
+		}finally{
+			try{
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
 	}
 	
-	void insertOrd() {
-		
+	void insertOrd(Ord order) {
+		String sql = INSERT_ORD; 
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, order.getC_seq());
+			pstmt.setString(2, order.getO_oName());
+			pstmt.setString(3, order.getO_oAddr());
+			pstmt.setString(4, order.getO_msg());
+			pstmt.setString(5, order.getO_oValid());
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally {
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
 	}
 	
 	void updateCartValid() {

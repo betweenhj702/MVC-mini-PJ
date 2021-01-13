@@ -45,6 +45,8 @@ public class OrderContoller extends HttpServlet {
  				
  				>> 한 개 Member member , pwd는 널로.
  		*/
+ 		
+ 		
  		String view = "order.jsp";
  		RequestDispatcher rd = request.getRequestDispatcher(view);
  		rd.forward(request, response);

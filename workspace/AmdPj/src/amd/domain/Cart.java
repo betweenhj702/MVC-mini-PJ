@@ -3,8 +3,8 @@ package amd.domain;
 public class Cart {
 
 	private int c_seq;
-	private String m_email;
-	private int p_code;
+	private String m_email;	//참조키
+	private int p_code;	//참조키
 	private String p_name;
 	private int p_price;
 	private String p_img;
