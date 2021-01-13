@@ -7,18 +7,21 @@ public class Cart {
 	private int p_code;
 	private String p_name;
 	private int p_price;
+	private String p_img;
 	private int c_amount;
 	private String c_valid;
 	
 	public Cart() {}
 
-	public Cart(int c_seq, String m_email, int p_code, String p_name, int p_price, int c_amount, String c_valid) {
+	public Cart(int c_seq, String m_email, int p_code, String p_name, int p_price, String p_img, int c_amount,
+			String c_valid) {
 		super();
 		this.c_seq = c_seq;
 		this.m_email = m_email;
 		this.p_code = p_code;
 		this.p_name = p_name;
 		this.p_price = p_price;
+		this.p_img = p_img;
 		this.c_amount = c_amount;
 		this.c_valid = c_valid;
 	}
@@ -63,6 +66,14 @@ public class Cart {
 		this.p_price = p_price;
 	}
 
+	public String getP_img() {
+		return p_img;
+	}
+
+	public void setP_img(String p_img) {
+		this.p_img = p_img;
+	}
+
 	public int getC_amount() {
 		return c_amount;
 	}
@@ -78,8 +89,6 @@ public class Cart {
 	public void setC_valid(String c_valid) {
 		this.c_valid = c_valid;
 	}
-
-	
 
 	
 
