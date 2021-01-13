@@ -3,13 +3,13 @@
 
 <script language="javascript">
 	if(${rCode} == <%=LoginSet.NO_EMAIL%>){
-		alert("로그인 실패 ( 존재하지않는 아이디 )");
+		alert("이메일을 다시 확인해주세요.");
 		location.href="login.jsp";
 	}else if(${rCode} == <%=LoginSet.NO_PWD%>){
-		alert("로그인 실패 ( 잘못된 비번 )");
+		alert("올바르지 않은 비밀번호입니다.");
 		location.href="login.do";
 	}else{
-		alert("${loginUser.m_name}님 쿠폰 지급 완료되었습니다!");
+		alert("${loginUser.m_name}님 환영합니다!");
 		location.href="../index.jsp";
 	}
 </script>

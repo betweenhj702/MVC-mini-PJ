@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, amd.domain.BoardQ, boardQ.mvc.vo.BoardQVO"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<html>
 
 <head>
 
@@ -14,16 +13,48 @@
   <title>HBAF</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="../css/clean-blog.min.css" rel="stylesheet">
-
+  <link href="css/clean-blog.min.css" rel="stylesheet">
+  
+  <style type="text/css">
+.dropbtn {
+    background-color: #FFC800;
+    padding: 15px 28px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative; 
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #ffff11;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color:000000;
+}
+  </style>
 </head>
 
 <body>
@@ -31,7 +62,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="../index.do">아몬드</a>
+      <a class="navbar-brand" href="index.do">아몬드</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -39,16 +70,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <c:choose>
-          	<c:when test="${empty loginUser}"><a class="nav-link" href="../login/login.do?m=form">로그인</a></c:when>
-          	<c:otherwise><a class="nav-link" href="../login/login.do?m=out">로그아웃</a></c:otherwise>
-          	</c:choose>
+            <a class="nav-link" href="index.html">로그인</a>
           </li>
           <li class="nav-item">
-            <c:choose>
-          	<c:when test="${empty loginUser}"> <a class="nav-link" href="../member/member.do?m=form">회원가입</a></c:when>
-          	<c:otherwise> <a class="nav-link" href="../member/member.do?m=form">회원정보</a></c:otherwise>
-          	</c:choose>
+            <a class="nav-link" href="about.html">회원가입</a>
           </li>
         </ul>
       </div>
@@ -56,7 +81,7 @@
   </nav>
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('../img/hbaf-bg3.png')">
+  <header class="masthead" style="background-image: url('img/hbaf-bg3.png')">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -66,57 +91,27 @@
         </div>
       </div>
     </div>
-	<div class="container">
-	  <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
-      <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
-      <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
-	  <a class="navbar-brand" href="">공지게시판</a>
-	  <strong><a class="navbar-brand" href="board_q.do">Q&A게시판</a></strong>
-     </div>
+      <div class="dropdown" align="left">
+        <button class="dropbtn" >상품</button>
+            <div class="dropdown-content">
+            <a href="index.html">전체</a>
+            <a href="index.html">아몬드</a>
+            <a href="index.html">이외</a>
+         </div>
+      </div>
+     <a class="navbar-brand" href="index.html">공지게시판</a>
+     <a class="navbar-brand" href="board_q/board_q.do">Q&A게시판</a>
   </header>
+  
 
+  <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <table class="table table-striped table-hover">
-            <tr>
-				<td width='20%' align='center'>글번호</td>
-				<td width='30%'>${boardQ.bq_seq}</td>
-				<td width='20%' align='center'>조회수</td>
-				<td width='30%'>${boardQ.bq_count}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>작성자</td>
-				<td colspan='3'>${boardQ.m_name}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>이메일</td>
-				<td colspan='3'>${boardQ.m_email}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>제목</td>
-				<td colspan='3'>${boardQ.bq_subject}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>내용</td>
-				<td colspan='3'>${boardQ.bq_content}</td>
-			</tr>
-        </table>
-		<div align='right'>  
-		    <a href="board_q.do" class="btn btn-success">목록</a>
-			<c:choose>
-				<c:when test="${empty loginUser}"></c:when>
-				<c:when test="${loginUser==boardQ.m_email}">
-					<a href="board_q.do?m=moveUPage&seq=${boardQ.bq_seq}" class="btn btn-success">수정</a>
-					<a href="board_q.do?m=delete&seq=${boardQ.bq_seq}" class="btn btn-success">삭제</a>
-				</c:when>
-				<c:otherwise>
-					<a href="board_q.do?m=moveRePage&seq=${boardQ.bq_seq}&ref=${boardQ.bq_refer}&lev=${boardQ.bq_lev}&place=${boardQ.bq_lev}"	class="btn btn-success">
-					답글</a>
-				</c:otherwise>
-			</c:choose>
-        </div>
-	  </div>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+      </div>
     </div>
   </div>
 

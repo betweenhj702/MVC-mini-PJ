@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import="java.util.*, amd.domain.BoardQ, boardQ.mvc.vo.BoardQVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
-
+<html>
 <head>
 
   <meta charset="utf-8">
@@ -14,21 +13,20 @@
   <title>HBAF</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-  <link href="../css/clean-blog.min.css" rel="stylesheet">
+  <link href="css/clean-blog.min.css" rel="stylesheet">
 
 </head>
-
 <body>
 
-  <!-- Navigation -->
+   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="../index.do">아몬드</a>
@@ -39,16 +37,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <c:choose>
-          	<c:when test="${empty loginUser}"><a class="nav-link" href="../login/login.do?m=form">로그인</a></c:when>
-          	<c:otherwise><a class="nav-link" href="../login/login.do?m=out">로그아웃</a></c:otherwise>
-          	</c:choose>
+            <a class="nav-link" href="../login/login.do?m=out">로그아웃</a>
           </li>
           <li class="nav-item">
-            <c:choose>
-          	<c:when test="${empty loginUser}"> <a class="nav-link" href="../member/member.do?m=form">회원가입</a></c:when>
-          	<c:otherwise> <a class="nav-link" href="../member/member.do?m=form">회원정보</a></c:otherwise>
-          	</c:choose>
+			<a class="nav-link" href="../member/member.do?m=form">회원정보</a>
           </li>
         </ul>
       </div>
@@ -67,60 +59,94 @@
       </div>
     </div>
 	<div class="container">
-	  <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
+      <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
 	  <a class="navbar-brand" href="">공지게시판</a>
-	  <strong><a class="navbar-brand" href="board_q.do">Q&A게시판</a></strong>
+	  <a class="navbar-brand" href="board_q.do">Q&A게시판</a>
      </div>
   </header>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <table class="table table-striped table-hover">
-            <tr>
-				<td width='20%' align='center'>글번호</td>
-				<td width='30%'>${boardQ.bq_seq}</td>
-				<td width='20%' align='center'>조회수</td>
-				<td width='30%'>${boardQ.bq_count}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>작성자</td>
-				<td colspan='3'>${boardQ.m_name}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>이메일</td>
-				<td colspan='3'>${boardQ.m_email}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>제목</td>
-				<td colspan='3'>${boardQ.bq_subject}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>내용</td>
-				<td colspan='3'>${boardQ.bq_content}</td>
-			</tr>
-        </table>
-		<div align='right'>  
-		    <a href="board_q.do" class="btn btn-success">목록</a>
-			<c:choose>
-				<c:when test="${empty loginUser}"></c:when>
-				<c:when test="${loginUser==boardQ.m_email}">
-					<a href="board_q.do?m=moveUPage&seq=${boardQ.bq_seq}" class="btn btn-success">수정</a>
-					<a href="board_q.do?m=delete&seq=${boardQ.bq_seq}" class="btn btn-success">삭제</a>
-				</c:when>
-				<c:otherwise>
-					<a href="board_q.do?m=moveRePage&seq=${boardQ.bq_seq}&ref=${boardQ.bq_refer}&lev=${boardQ.bq_lev}&place=${boardQ.bq_lev}"	class="btn btn-success">
-					답글</a>
-				</c:otherwise>
-			</c:choose>
-        </div>
-	  </div>
+   <div class="container">
+    <div class="row">	
+		<div class="col-lg-8 col-md-10 mx-auto">
+			주문확인<br/><br/>
+			<table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th width='30%'>이미지</th>
+                    <th width='20%'>상품이름</th>
+					<th width='20%'>상품가격</th>
+                    <th width='10%'>수량</th>
+					<th width='20%'>주문금액</th>
+                </tr>
+            </thead>
+				<tbody>
+				   <c:if test="${empty product.list}">
+					   <TR align='center' noshade>
+						  <TD colspan="5">데이터가 없음</TD>
+					   </TR>
+				   </c:if> 
+				   <c:forEach items="${product.list}" var="boardQ">
+							<td>${boardQ.bq_seq}</td>
+							<td>${boardQ.m_name}</td>
+							<td>${boardQ.m_email}</td>
+							<td>${boardQ.bq_seq}</td>
+							<td>${boardQ.bq_seq}</td>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-lg-8 col-md-10 mx-auto">
+			<br/><br/>주문자 정보<br/><br/>
+			<table class="table table-striped table-hover">
+				<tr>
+					<td width='20%' align='center'>이름</td>
+					<td width='30%'>${boardQ.bq_seq}</td>
+					<td width='20%' align='center'>이메일</td>
+					<td width='30%'>${boardQ.bq_count}</td>
+				</tr>
+				<tr>
+					<td align='center', colspan='1'>전화번호</td>
+					<td colspan='3'>${boardQ.m_name}</td>
+				</tr>
+				<tr>
+					<td align='center', colspan='1'>주소</td>
+					<td colspan='3'>${boardQ.m_email}
+						사용하기 버튼
+					</td>
+				</tr>
+            </table>
+		</div>
+		<div class="col-lg-8 col-md-10 mx-auto">
+			<form name="input" method="post" action="board_q.do?m=insert">
+			배송지정보입력<br/><br/>
+			<table class="table table-striped table-hover">
+			  <tr>
+				 <td width="10%" align="center">수령인</td>
+				 <td><input type="text" name="writer" class="form-control" value="${loginUser.m_name}" ></td>
+			  </tr>
+			  <tr>
+				 <td align="center">연락처</td>
+				 <td><input type="text" name="email" class="form-control" value="${loginUser.m_email}" ></td>
+			  </tr>
+			  <tr>
+				 <td align="center">배송지 주소</td>
+				 <td><input type="text" name="subject" class="form-control"></td>
+			  </tr>
+			  <tr>
+				 <td align="center">메세지</td>
+				 <td><textarea  name="content" rows="5" class="form-control"></textarea></td>
+			  </tr>
+			</table>
+			<div align='right'>            
+				<input type="button" value="결제" class="btn btn-success">
+				<input type="reset" value="다시작성" class="btn btn-success" onclick="input.subject.focus()">
+			</div>
+			</form>
+		</div>
     </div>
   </div>
-
-  <hr>
 
   <!-- Footer -->
   <footer>

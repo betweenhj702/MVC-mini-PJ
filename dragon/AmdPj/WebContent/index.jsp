@@ -8,7 +8,9 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
+  <meta name="description" content=ㅜ
+  
+  "">
   <meta name="author" content="">
 
   <title>HBAF</title>
@@ -41,7 +43,7 @@
           <li class="nav-item">
           	<c:choose>
           	<c:when test="${empty loginUser}"><a class="nav-link" href="login/login.do?m=form">로그인</a></c:when>
-          	<c:otherwise><a class="nav-link" href="login/login.do?m=form">로그아웃</a></c:otherwise>
+          	<c:otherwise><a class="nav-link" href="login/login.do?m=out">로그아웃</a></c:otherwise>
           	</c:choose>
           </li>
           <li class="nav-item">
@@ -67,8 +69,10 @@
       </div>
     </div>
 	<div class="container">
-      <a class="navbar-brand" href="product/product.do">상품</a>
-	  <a class="navbar-brand" href="">공지게시판</a>
+      <a class="navbar-brand" href="product/product.do?cp=1&ps=16">전체 상품</a>
+      <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
+      <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
+	  <a class="navbar-brand" href="board/list.jsp">공지게시판</a>
 	  <a class="navbar-brand" href="board_q/board_q.do">Q&A게시판</a>
      </div>
   </header>

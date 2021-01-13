@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" import="amd.domain.Member"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" 
+	import="amd.domain.Member"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
@@ -137,10 +139,16 @@ function check(){
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="../login/login.do?m=form">로그인</a>
+          <c:choose>
+            <c:when test="${empty loginUser}"><a class="nav-link" href="login/login.do?m=form">로그인</a></c:when>
+            <c:otherwise><a class="nav-link" href="../login/login.do?m=out">로그아웃</a></c:otherwise>
+          	</c:choose>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="member/member.do?m=form">회원가입</a>
+            <c:choose>
+          	<c:when test="${empty loginUser}"> <a class="nav-link" href="member/member.do?m=form">회원가입</a></c:when>
+          	<c:otherwise> <a class="nav-link" href="member/member.do?m=goUpdate">회원정보</a></c:otherwise>
+          	</c:choose>
           </li>
         </ul>
       </div>
@@ -158,11 +166,7 @@ function check(){
         </div>
       </div>
     </div>
-	<div class="container">
-      <a class="navbar-brand" href="index.html">상품</a>
-	  <a class="navbar-brand" href="index.html">공지게시판</a>
-	  <a class="navbar-brand" href="index.html">Q&A게시판</a>
-     </div>
+
   </header>
   
 

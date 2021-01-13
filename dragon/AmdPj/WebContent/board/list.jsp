@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, amd.domain.BoardQ, boardQ.mvc.vo.BoardQVO"%>
+    pageEncoding="UTF-8" import="java.util.*, amd.domain.BoardN, board.mvc.vo.BoardNVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
@@ -67,97 +67,88 @@
       </div>
     </div>
 	<div class="container">
-	  <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
+      <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
 	  <a class="navbar-brand" href="">공지게시판</a>
 	  <strong><a class="navbar-brand" href="board_q.do">Q&A게시판</a></strong>
      </div>
   </header>
+  
 
+  <!-- Main Content -->
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      
         <table class="table table-striped table-hover">
-            <tr>
-				<td width='20%' align='center'>글번호</td>
-				<td width='30%'>${boardQ.bq_seq}</td>
-				<td width='20%' align='center'>조회수</td>
-				<td width='30%'>${boardQ.bq_count}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>작성자</td>
-				<td colspan='3'>${boardQ.m_name}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>이메일</td>
-				<td colspan='3'>${boardQ.m_email}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>제목</td>
-				<td colspan='3'>${boardQ.bq_subject}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>내용</td>
-				<td colspan='3'>${boardQ.bq_content}</td>
-			</tr>
-        </table>
-		<div align='right'>  
-		    <a href="board_q.do" class="btn btn-success">목록</a>
-			<c:choose>
-				<c:when test="${empty loginUser}"></c:when>
-				<c:when test="${loginUser==boardQ.m_email}">
-					<a href="board_q.do?m=moveUPage&seq=${boardQ.bq_seq}" class="btn btn-success">수정</a>
-					<a href="board_q.do?m=delete&seq=${boardQ.bq_seq}" class="btn btn-success">삭제</a>
-				</c:when>
-				<c:otherwise>
-					<a href="board_q.do?m=moveRePage&seq=${boardQ.bq_seq}&ref=${boardQ.bq_refer}&lev=${boardQ.bq_lev}&place=${boardQ.bq_lev}"	class="btn btn-success">
-					답글</a>
-				</c:otherwise>
-			</c:choose>
-        </div>
-	  </div>
-    </div>
-  </div>
+            <thead>
+                <tr>
+                    <th width='5%'>NO</th>
+                    <th width='10%'>작성자</th>
+					<th width='20%'>이메일</th>
+                    <th width='45%'>제목</th>
+                    <th width='10%'>날짜</th>
+                    <th width='10%'>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+               <c:if test="${empty BoardNVO.list}">
+			       <TR align='center' noshade>
+			          <TD colspan="6">작성된 글이 없습니다.</TD>
+			       </TR>
+			   </c:if> 
+			   <c:forEach items="${BoardNVO.list}" var="boardN">
+                    <tr>
+                        <td>${BoardN.bn_seq}</td>
+                        <td>${BoardN.m_name}</td>
+                        <td>${BoardN.m_email}</td>
+                        <td>
+                        	<c:forEach items="${BoardNVO.list}" var="board">
+									&nbsp;&nbsp;&nbsp;
+							</c:forEach>
+							<a href="board.do?m=content&seq=${board.bn_seq}" >
+								${board.b_subject} </a></td>
+								
+										<td>관리자</td>
+									<td>${board.bn_date}</td>
+									<td>${board.bn_count}</td>
+							</tr>
+						</c:forEach>
+                 	</tbody>
+				</table>
+				<div style='width:80px;float:right;'>
+				<c:if test="${!empty sessionScope.Admin}">
+                        <a href="board.do?m=write"><input type="submit" class="btn btn-sm btn-primary" id="btnWrite" value ="글쓰기"></a>
+                </c:if>
+        				</div>
+		&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<c:forEach begin="1" end="${BoardNVO.totalPageCount}" var="i">
+				<a href='board.do?cp=${i}'> 
+				<c:choose>
+					<c:when test="${i==BoardNVO.currentPage}">
+						<strong>${i}</strong>
+					</c:when>
+					<c:otherwise>
+		         	   ${i}
+		            </c:otherwise>
+				</c:choose>
+				</a>&nbsp;
+	
+  </c:forEach>
 
   <hr>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <ul class="list-inline text-center">
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fas fa-circle fa-stack-2x"></i>
-                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-              </a>
-            </li>
-          </ul>
-          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
