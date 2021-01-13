@@ -14,9 +14,9 @@ import static boardQ.mvc.model.BoardQSQL.*;
 class BoardQDAO {
 	
 	private DataSource ds;
-	Connection con;
-	PreparedStatement pstmt;
-	Statement stmt;
+	private Connection con;
+	private PreparedStatement pstmt;
+	private Statement stmt;
 	
 	BoardQDAO(){	
 		try {
