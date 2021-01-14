@@ -66,8 +66,8 @@
 	  <a class="navbar-brand" href="board_q.do">QA게시판</a>
      </div>
   </header>
-
-   <div class="container">
+ 
+ <div class="container">
     <div class="row">	
 		<div class="col-lg-8 col-md-10 mx-auto">
 			주문확인<br/><br/>
@@ -81,13 +81,13 @@
                 </tr>
             </thead>
 				<tbody>
-				   <c:if test="${empty orderVO.listC}">
+				   <c:if test="${empty listC}">
 					   <TR align='center' noshade>
 						  <TD colspan="5">데이터가 없음</TD>
 					   </TR>
 				   </c:if>
 				   <c:set var="total" value="0" scope="request"/>
-				   <c:forEach items="${orderVO.listC}" var="cart">
+				   <c:forEach items="${listC}" var="cart">
 				   		<TR align='center' noshade>
 							<c:set var = "total" value="${total + (cart.p_price * cart.c_amount)}"/>
 							<td>
@@ -112,57 +112,8 @@
 			<div align="right">주문금액 합계 : ${total}</div>
 			
 		</div>
-		<div class="col-lg-8 col-md-10 mx-auto">
-			<br/><br/>주문자 정보<br/><br/>
-			<table class="table table-striped table-hover">
-				<tr>
-					<td width='20%' align='center'>이름</td>
-					<td width='30%'>${orderVO.member.m_name}</td>
-					<td width='20%' align='center'>이메일</td>
-					<td width='30%'>${orderVO.member.m_email}</td>
-				</tr>
-				<tr>
-					<td align='center', colspan='1'>전화번호</td>
-					<td colspan='3'>${orderVO.member.m_phone}</td>
-				</tr>
-				<tr>
-					<td align='center', colspan='1'>주소</td>
-					<td colspan='3'>${orderVO.member.m_addr}
-						
-					</td>
-				</tr>
-            </table>
-		</div>
-		<div class="col-lg-8 col-md-10 mx-auto">
-			<form name="input" method="post" action="order.do?m=insertOrd">
-			배송지정보입력<br/><br/>
-			<table class="table table-striped table-hover">
-			  <tr>
-				 <td width="30%" align="center">수령인</td>
-				 <td><input type="text" name="name" class="form-control" value="" ></td>
-			  </tr>
-			  <tr>
-				 <td align="center">연락처</td>
-				 <td><input type="text" name="phone" class="form-control" value="" ></td>
-			  </tr>
-			  <tr>
-				 <td align="center">배송지 주소</td>
-				 <td><input type="text" name="addr" class="form-control" value="${orderVO.member.m_addr}"></td>
-			  </tr>
-			  <tr>
-				 <td align="center">메세지</td>
-				 <td><textarea  name="msg" rows="5" class="form-control"></textarea></td>
-			  </tr>
-			</table>
-			<div align='right'>
-				총금액 : ${total} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="submit" value="결제" class="btn btn-success">
-				<input type="reset" value="다시작성" class="btn btn-success" onclick="input.writer.focus()">
-			</div>
-			</form>
-		</div>
-    </div>
-  </div>
+	</div>
+</div>
 
   <!-- Footer -->
   <footer>

@@ -146,6 +146,7 @@ class OrderDAO {
 			pstmt.setString(3, order.getO_oAddr());
 			pstmt.setString(4, order.getO_msg());
 			pstmt.setString(5, order.getO_oValid());
+			pstmt.setInt(6, order.getO_total());
 			pstmt.executeUpdate();
 		}catch(SQLException se) {
 			System.out.println(se);
@@ -176,6 +177,37 @@ class OrderDAO {
 		}
 	}
 	
-	
+	ArrayList<Cart> showOrderInfo(String m_email){
+		String sql = SELECT_CART_NO;
+		ArrayList<Cart> listC = new ArrayList<Cart>();
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_email);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int c_seq = rs.getInt("C_SEQ");
+				int c_amount = rs.getInt("C_AMOUNT");
+				String p_name = rs.getString("P_NAME");
+				int p_price = rs.getInt("P_PRICE");
+				String p_img = rs.getString("P_IMG");
+				
+				Cart cart = new Cart(c_seq, m_email, -1, p_name, p_price, p_img, c_amount, null);
+				listC.add(cart);
+			}
+			return listC;
+		}catch(SQLException se) {
+			System.out.println(se);
+			return null;
+		}finally {
+			try{
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
 	
 }

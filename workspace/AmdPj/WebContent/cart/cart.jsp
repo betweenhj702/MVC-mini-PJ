@@ -125,7 +125,9 @@
 </tbody>
 </table>
 </div> <!-- card.// -->
-
+	<div>
+		<a href="../order/order.do" class="btn btn-success"> 주문하기</a>
+	</div>
 </div> 
 <!--container end.//-->
 

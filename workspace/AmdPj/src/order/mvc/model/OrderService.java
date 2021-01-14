@@ -24,8 +24,12 @@ public class OrderService {
 		return new OrderVO(listC, member);
 	}
 	
-	public void insertOrderS(String m_email, Ord order) {
-		dao.insertOrd(order);
+	public void insertOrderS(String m_email) {
+		//dao.insertOrd(order);
 		dao.updateCartValid(m_email);
+	}
+	
+	public List<Cart> showOrderInfoS(String m_email) {
+		return dao.showOrderInfo(m_email);
 	}
 }

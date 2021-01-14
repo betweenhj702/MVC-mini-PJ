@@ -1,6 +1,7 @@
 package order.mvc.control;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import amd.domain.Cart;
 import amd.domain.Member;
 import order.mvc.model.OrderService;
 import order.mvc.vo.OrderVO;
@@ -28,6 +30,7 @@ public class OrderContoller extends HttpServlet {
 			switch(m) {
 			case "insertOrd" : insertOrd(request,response);break;
 			case "listOrd" : listOrd(request,response);break;
+			case "content" : showContent(request,response);break;
 			default: moveOrdPage(request, response);
 			}
 		}else {
@@ -57,13 +60,15 @@ public class OrderContoller extends HttpServlet {
  	
  	private void insertOrd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  		/* 결제버튼을 누를 떄
- 		1. 인서트 주문테이블
- 			insert into ORD values(ORD_SEQ.nextval, ?, SYSDATE, ?, ?, ?, ?)
- 		
- 		2. 업데이트 카트
- 			update CART set C_VALID ='n' where C_SEQ = ?
+ 			//1. 인서트 주문테이블 >>> 테이블 설계 오류
+ 			//insert into ORD values(ORD_SEQ.nextval, ?, SYSDATE, ?, ?, ?, ?, ?)";
+ 			
+ 			1. 업데이트 카트 (유효성 변경)
+ 			update CART set C_VALID ='N' where C_SEQ = any(select C_SEQ from CART c join Member m on c.M_EMAIL = ? and c.C_VALID = 'Y')
  		*/
- 		
+ 		HttpSession session = request.getSession();
+ 		Member member = (Member)session.getAttribute("loginUser");
+ 		service.insertOrderS(member.getM_email());
  		
  		String view = "order.do?m=listOrd";
  		RequestDispatcher rd = request.getRequestDispatcher(view);
@@ -72,9 +77,33 @@ public class OrderContoller extends HttpServlet {
  	
  	private void listOrd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  		/* 구매내역을 누를 때
- 		 리스트  select 
+ 		 리스트
+ 		 select p.P_NAME, p.P_PRICE, p.P_IMG, c.C_SEQ, c.C_AMOUNT from PRODUCT p join CART c on p.P_CODE = any(select P_CODE from CART where C_SEQ = any(select C_SEQ from CART c join Member m on c.M_EMAIL = ? and c.C_VALID='Y'))
  		*/
+ 		HttpSession session = request.getSession();
+ 		Member member = (Member)session.getAttribute("loginUser");
+ 		
+ 		List<Cart> listC = service.showOrderInfoS(member.getM_email());
+ 		Cart cart = null;
+ 		if(listC.size()!=0) cart = listC.get(0);
+ 		
+ 		request.setAttribute("listC", listC);
+ 		request.setAttribute("Cart", cart);
+ 		
  		String view = "list.jsp";
+ 		RequestDispatcher rd = request.getRequestDispatcher(view);
+ 		rd.forward(request, response);
+ 	}
+ 	
+ 	private void showContent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+ 		
+ 		HttpSession session = request.getSession();
+ 		Member member = (Member)session.getAttribute("loginUser");
+ 		
+ 		List<Cart> listC = service.showOrderInfoS(member.getM_email());
+ 		
+ 		request.setAttribute("listC", listC);
+ 		String view = "content.jsp";
  		RequestDispatcher rd = request.getRequestDispatcher(view);
  		rd.forward(request, response);
  	}

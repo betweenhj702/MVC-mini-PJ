@@ -66,116 +66,55 @@
 	  <a class="navbar-brand" href="board_q.do">QA게시판</a>
      </div>
   </header>
- 
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                구매 내역
-                <strong>01/01/2020</strong>
-                <span class="float-right"> <strong>Status:</strong> Pending</span>
-            </div>
-            <div class="card-body">
-                <div class="row mb-4">
-                    <div class="col-sm-6">
-                        <h6 class="mb-3">From:</h6>
-                        <div>
-                            <strong>DotNetTec</strong>
-                        </div>
-                        <div>Madalinskiego 8</div>
-                        <div>71-101 Szczecin, Poland</div>
-                        <div>Email: info@dotnettec.com</div>
-                        <div>Phone: +91 9800000000</div>
-                    </div>
-                </div>
-                <div class="table-responsive-sm">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th class="center">#</th>
-                                <th>Item</th>
-                                <th>Description</th>
-                                <th class="right">Unit Cost</th>
-                                <th class="center">Qty</th>
-                                <th class="right">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="center">1</td>
-                                <td class="left strong">Origin License</td>
-                                <td class="left">Extended License</td>
-                                <td class="right">$999,00</td>
-                                <td class="center">1</td>
-                                <td class="right">$999,00</td>
-                            </tr>
-                            <tr>
-                                <td class="center">2</td>
-                                <td class="left">Custom Services</td>
-                                <td class="left">Instalation and Customization (cost per hour)</td>
-                                <td class="right">$150,00</td>
-                                <td class="center">20</td>
-                                <td class="right">$3.000,00</td>
-                            </tr>
-                            <tr>
-                                <td class="center">3</td>
-                                <td class="left">Hosting</td>
-                                <td class="left">1 year subcription</td>
-                                <td class="right">$499,00</td>
-                                <td class="center">1</td>
-                                <td class="right">$499,00</td>
-                            </tr>
-                            <tr>
-                                <td class="center">4</td>
-                                <td class="left">Platinum Support</td>
-                                <td class="left">1 year subcription 24/7</td>
-                                <td class="right">$3.999,00</td>
-                                <td class="center">1</td>
-                                <td class="right">$3.999,00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-5">
-                    </div>
-                    <div class="col-lg-4 col-sm-5 ml-auto">
-                        <table class="table table-clear">
-                            <tbody>
-                                <tr>
-                                    <td class="left">
-                                        <strong>Subtotal</strong>
-                                    </td>
-                                    <td class="right">$8.497,00</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong>Discount (20%)</strong>
-                                    </td>
-                                    <td class="right">$1,699,40</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong>배송비</strong>
-                                    </td>
-                                    <td class="right">$679,76</td>
-                                </tr>
-                                <tr>
-                                    <td class="left">
-                                        <strong>Total</strong>
-                                    </td>
-                                    <td class="right">
-                                        <strong>$7.477,36</strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+ <div class="container">
+    <div class="row">	
+		<div class="col-lg-8 col-md-10 mx-auto">
+			결제내역<br/><br/>
+			<table class="table table-striped table-hover">
+	            <thead>
+	                <TR align='center' noshade>
+	                    <th width='50%'>상품</th>
+	                    <th width='50%'>총 결제금액</th>
+	                </TR>
+	            </thead>
+                <tbody>
+			   		<c:if test="${empty listC}">
+				   	<TR align='center' noshade>
+						<TD colspan="5">데이터가 없음</TD>
+				   	</TR>
+			   		</c:if>
+			   		<c:set var="total" value="0" scope="request"/>
+		
+			   		<c:forEach items="${listC}" var="cart">
+			   			<c:set var = "total" value="${total + (cart.p_price * cart.c_amount)}"/>
+			   		</c:forEach>
+			   		<TR align='center' noshade>
+			   			<td>
+			   			<c:if test="${!empty Cart}">
+							<figure class="media">
+								<div class="img-wrap"><img src="../img/${Cart.p_img}" width="150" class="img-thumbnail img-sm"></div>
+								<figcaption class="media-body">
+									<h6 class="title text-truncate">
+										<a href="order.do?m=content">${Cart.p_name} 외 ......</a>
+									</h6>
+									<dl class="param param-inline small">
+									  <dt></dt>
+									  <dd></dd>
+									</dl>
+								</figcaption>
+							</figure>
+						</c:if >
+						
+						</td>
+						<td>${total} 원</td>
+			   		</TR>
+			   	</tbody>
+	           
+	        </table>    
+  		</div>
     </div>
-
-  <!-- Footer -->
+ </div>
+    <!-- Footer -->
   <footer>
     <div class="container">
       <div class="row">

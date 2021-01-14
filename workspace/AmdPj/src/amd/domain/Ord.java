@@ -7,11 +7,13 @@ public class Ord {
 	private long c_seq; //ÂüÁ¶Å°
 	private Date o_oDate;
 	private String o_oName;
+	private String o_oPhone;
 	private String o_oAddr;
 	private String o_msg;
 	private String o_oValid;
+	private int o_total;
 	
-	public Ord(long o_seq, long c_seq, Date o_oDate, String o_oName, String o_oAddr, String o_msg, String o_oValid) {
+	public Ord(long o_seq, long c_seq, Date o_oDate, String o_oName, String o_oAddr, String o_msg, String o_oValid, int o_total) {
 		super();
 		this.o_seq = o_seq;
 		this.c_seq = c_seq;
@@ -20,7 +22,17 @@ public class Ord {
 		this.o_oAddr = o_oAddr;
 		this.o_msg = o_msg;
 		this.o_oValid = o_oValid;
+		this.o_total = o_total;
 	}
+	
+	public int getO_total() {
+		return o_total;
+	}
+
+	public void setO_total(int o_total) {
+		this.o_total = o_total;
+	}
+
 	public long getO_seq() {
 		return o_seq;
 	}

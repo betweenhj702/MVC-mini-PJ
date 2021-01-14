@@ -23,6 +23,7 @@ create table ORD(
        O_OADDR varchar2(100) not null,
        O_MSG varchar2(100),
        O_OVALID varchar2(2) default 'N',
+       O_TOTAL number,
        constraint ORD_FK foreign key(C_SEQ) references CART(C_SEQ)
     );
 
