@@ -15,6 +15,7 @@ public class BoardN {
 		public BoardN(long bn_seq, String bn_subject, String bn_content, Date bn_rdate, int bn_count) {
 			super();
 			this.bn_seq = bn_seq;
+			
 			this.bn_subject = bn_subject;
 			this.bn_content = bn_content;
 			this.bn_rdate = bn_rdate;

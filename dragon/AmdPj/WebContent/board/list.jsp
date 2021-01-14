@@ -70,9 +70,9 @@
       <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
-	  <a class="navbar-brand" href="">공지게시판</a>
-	  <strong><a class="navbar-brand" href="board_q.do">Q&A게시판</a></strong>
-     </div>
+	  <strong><a class="navbar-brand" href="">공지게시판</a></strong>
+	  <a class="navbar-brand" href="board_q.do">Q&A게시판</a>
+	  
   </header>
   
 
@@ -97,30 +97,25 @@
 			          <TD colspan="6">작성된 글이 없습니다.</TD>
 			       </TR>
 			   </c:if> 
-			   <c:forEach items="${BoardNVO.list}" var="boardN">
+			   <c:forEach items="${BoardNVO.list}" var="BoardN">
                     <tr>
                         <td>${BoardN.bn_seq}</td>
-                        <td>${BoardN.m_name}</td>
-                        <td>${BoardN.m_email}</td>
-                        <td>
-                        	<c:forEach items="${BoardNVO.list}" var="board">
-									&nbsp;&nbsp;&nbsp;
-							</c:forEach>
-							<a href="board.do?m=content&seq=${board.bn_seq}" >
-								${board.b_subject} </a></td>
+                        <td>관리자</td>
+                        <td> admin@gmail.com </td>	
+						<td><a href="board.do?m=content&seq=${BoardN.bn_seq}">${BoardN.bn_subject}</a></td>
+					
+						<td>${BoardN.bn_rdate}</td>
+						<td>${BoardN.bn_count}</td>		
 								
-										<td>관리자</td>
-									<td>${board.bn_date}</td>
-									<td>${board.bn_count}</td>
-							</tr>
-						</c:forEach>
-                 	</tbody>
-				</table>
-				<div style='width:80px;float:right;'>
-				<c:if test="${!empty sessionScope.Admin}">
-                        <a href="board.do?m=write"><input type="submit" class="btn btn-sm btn-primary" id="btnWrite" value ="글쓰기"></a>
-                </c:if>
-        				</div>
+					</tr>					
+				</c:forEach>									
+	         </tbody>
+		</table>
+		<div style='width:80px;float:right;'>
+		<c:if test="${!empty sessionScope.Admin}">
+	                     <a href="board.do?m=write"><input type="submit" class="btn btn-sm btn-primary" id="btnWrite" value ="글쓰기"></a>
+	             </c:if>
+	     				</div>
 		&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

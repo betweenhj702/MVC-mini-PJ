@@ -98,6 +98,7 @@ public class BoardController extends HttpServlet {
 		
 		BoardNService service = BoardNService.getInstance();
 		BoardNVO boardnvo = service.getListResult(cp, ps);	
+		if(boardnvo.getList().size()!=0) System.out.println("데이터 들어감");
 		request.setAttribute("BoardNVO", boardnvo);		
 		if(boardnvo.getList().size() == 0 && cp>1) {
 			response.sendRedirect("board.do?m=list&cp="+(cp-1));

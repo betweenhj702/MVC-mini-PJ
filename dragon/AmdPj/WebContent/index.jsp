@@ -72,7 +72,7 @@
       <a class="navbar-brand" href="product/product.do?cp=1&ps=16">전체 상품</a>
       <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
       <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
-	  <a class="navbar-brand" href="board/list.jsp">공지게시판</a>
+	  <a class="navbar-brand" href="board/board.do">공지게시판</a>
 	  <a class="navbar-brand" href="board_q/board_q.do">Q&A게시판</a>
      </div>
   </header>

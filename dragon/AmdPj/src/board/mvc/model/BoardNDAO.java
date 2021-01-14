@@ -78,7 +78,7 @@ public class BoardNDAO {
 				long bn_seq = rs.getLong("BN_SEQ");
 				String bn_subject = rs.getString("BN_SUBJECT");
 				String bn_content = rs.getString("BN_CONTENT");			
-				Date bn_date = rs.getDate("BN_DATE");
+				Date bn_date = rs.getDate("BN_RDATE");
 				int bn_count = rs.getInt("BN_COUNT");
 				BoardN bn = new BoardN(bn_seq, bn_subject, bn_content, bn_date, bn_count);
 				list.add(bn);
