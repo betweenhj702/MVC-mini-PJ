@@ -17,7 +17,7 @@
   <meta name="author" content="">
 
   <title>HBAF</title>
-
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -100,29 +100,36 @@
   <dt>제품 설명</dt>
   <dd><p>${product.p_info} </p></dd>
 </dl>
-
+<form name="input" method="post" action="../cart/cart.do?m=insert&p_code=${product.p_code}&p_img=${product.p_img}">
 <hr>
 	<div class="row">
 		<div class="col-sm-5">
 			<dl class="param param-inline">
 			  <dt>수량: </dt>
 			  <dd>
-			  	<select class="form-control form-control-sm" style="width:70px;">
-			  		<option> 1 </option>
-			  		<option> 2 </option>
-			  		<option> 3 </option>
-			  		<option> 4 </option>
-			  		<option> 5 </option>
-			  		<option> 6 </option>
-			  		<option> 7 </option>
+			  		
+			  	<select name="c_amount" class="form-control form-control-sm" style="width:70px;">
+			  		<option value="1"> 1 </option>
+			  		<option value="2"> 2 </option>
+			  		<option value="3"> 3 </option>
+			  		<option value="4"> 4 </option>
+			  		<option value="5"> 5 </option>
+			  		<option value="6"> 6 </option>
+			  		<option value="7"> 7 </option>
 			  	</select>
+			  	
 			  </dd>
 			</dl>  <!-- item-property .// -->
 		</div> <!-- col.// -->
 	</div> <!-- row.// -->
 	<hr>
-	<a href="" class="btn btn-lg btn-primary text-uppercase"> 바로 구매 </a>
-	<a href="../cart/cart.do?m=insert&p_code=${product.p_code}&c_amount=1&p_img=${product.p_img}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> 장바구니 </a>
+	  <a href="" class="btn btn-lg btn-primary text-uppercase"> 바로 구매 </a>
+	  <input type="submit" value="장바구니" 
+	  class="btn btn-lg btn-outline-primary text-uppercase"/>
+	<!--<a href="../cart/cart.do?m=insert&p_code=${product.p_code}&p_img=${product.p_img}" class="btn btn-lg btn-outline-primary text-uppercase"> 
+	<i class="fas fa-shopping-cart"></i> 장바구니 
+	</a>-->
+</form>
 </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
 	</div> <!-- row.// -->

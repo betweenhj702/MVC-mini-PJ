@@ -70,6 +70,7 @@
      </div>
   </header>
 <div class="container">
+<form name="input" method="post" action="cart.do?m=update">
  <p class="text-center">${sessionScope.m_email}님의 장바구니</p>
 <hr>
 
@@ -101,14 +102,19 @@
 </figure> 
 	</td>
 	<td> 
+	
+	<!-- 폼안에 셀렉트가 여러개 만들어진다. 
+		1. 이때 셀렉트의 이름을 달리해줘야 각 상품의 씨어만트값을 가져올수있음
+		2. 각 상품을 업뎃할수있는방법은?  걍 하지마이씨-->
+		
 		<select class="form-control">
-			<option>1</option>
-			<option>2</option>	
-			<option>3</option>	
-			<option>4</option>
-			<option>5</option>	
-			<option>6</option>
-			<option>7</option>
+			<option value="1" <c:if test="${cart.c_amount==1}">selected</c:if> > 1 </option>
+	  		<option value="2" <c:if test="${cart.c_amount==2}">selected</c:if> > 2 </option>
+	  		<option value="3" <c:if test="${cart.c_amount==3}">selected</c:if> > 3 </option>
+	  		<option value="4" <c:if test="${cart.c_amount==4}">selected</c:if> > 4 </option>
+	  		<option value="5" <c:if test="${cart.c_amount==5}">selected</c:if> > 5 </option>
+	  		<option value="6" <c:if test="${cart.c_amount==6}">selected</c:if> > 6 </option>
+	  		<option value="7" <c:if test="${cart.c_amount==7}">selected</c:if> > 7 </option>
 		</select> 
 	</td>
 	<td> 
@@ -126,8 +132,10 @@
 </table>
 </div> <!-- card.// -->
 	<div>
-		<a href="../order/order.do" class="btn btn-success"> 주문하기</a>
+		<input type="submit" value="주문하기" class="btn btn-success">
+		<!--  <a href="cart.do?m=update" class="btn btn-success"> 주문하기</a> -->
 	</div>
+	</form>
 </div> 
 <!--container end.//-->
 

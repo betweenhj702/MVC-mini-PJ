@@ -88,6 +88,7 @@ public class CartController extends HttpServlet {
 			
 			//6 c_amount
 			String c_amountStr= request.getParameter("c_amount");
+			System.out.println("장바구니담을때 :"+c_amountStr);
 			int c_amount = 0;
 			if(c_amountStr == null) {
 				c_amount = -1;
@@ -164,6 +165,7 @@ public class CartController extends HttpServlet {
 			}
 		}
 		String c_amountStr = request.getParameter("c_amount");
+		System.out.println("카트에서 수량을 변경할떄 :"+c_amountStr);
 		int c_amount = 0;
 		if(c_amountStr == null) {
 			c_amount = -1;
