@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class OrderContoller
- */
+
 @WebServlet("/order/order.do")
 public class OrderContoller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +30,10 @@ public class OrderContoller extends HttpServlet {
 	}
  	private void moveOrdPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  		/* 주문페이지에 표시할 내역
+ 	 	카트에서 넘어올 때 수량을 업데이트 한다
+ 	 	
+ 	 	
+ 	 	
  	 	리스팅 : VO로 묶어서 전달하자
  			
  			1)리퀘스트에 저장된 장바구니 c_seq >> 이미지이름가격/수량,  
@@ -61,7 +63,7 @@ public class OrderContoller extends HttpServlet {
  			update CART set C_VALID ='n' where C_SEQ = ?
  		*/
  		
- 		String view = "";
+ 		String view = "list.jsp";
  		RequestDispatcher rd = request.getRequestDispatcher(view);
  		rd.forward(request, response);
  	}

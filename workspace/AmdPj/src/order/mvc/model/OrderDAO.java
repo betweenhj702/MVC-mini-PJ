@@ -39,14 +39,14 @@ class OrderDAO {
 //	+ " join CART c on p.P_CODE = (select P_CODE from CART where C_SEQ = ?)";
 //	"select * from CART where M_EMAIL=? and C_VALID=?";
 	
-	ArrayList<Product> showProductInCart(int c_seq){
+	ArrayList<Product> showProductInCart(String m_email){
 		String sql = PRODUCT_IN_CART;
 		ArrayList<Product> listP = new ArrayList<Product>();
 		ResultSet rs = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, c_seq);
+			pstmt.setString(1, m_email);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int p_code = rs.getInt("P_CODE");
@@ -72,7 +72,7 @@ class OrderDAO {
 		}
 	}
 	
-	ArrayList<Cart> showCartInfo(String m_email, String c_valid){
+	ArrayList<Cart> showCartInfo(String m_email){
 		String sql = INFO_CART;
 		ArrayList<Cart> listC = new ArrayList<Cart>();
 		ResultSet rs = null;
@@ -80,12 +80,12 @@ class OrderDAO {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_email);
-			pstmt.setString(2, c_valid);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int c_seq = rs.getInt("C_SEQ");
 				int c_amount = rs.getInt("C_AMOUNT");
 				int p_code = rs.getInt("P_CODE");
+				String c_valid = rs.getString("C_VALID");
 				Cart cart = new Cart(c_seq, m_email, p_code, null, -1, null, c_amount, c_valid);
 				listC.add(cart);
 			}
@@ -154,8 +154,22 @@ class OrderDAO {
 		}
 	}
 	
-	void updateCartValid() {
-		
+	void updateCartValid(String m_email) {
+		String sql = UPDATE_CART;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_email);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally {
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
 	}
 	
 	
