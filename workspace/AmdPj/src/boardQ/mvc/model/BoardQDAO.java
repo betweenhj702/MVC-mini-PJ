@@ -115,9 +115,9 @@ class BoardQDAO {
 			}
 		}
 	}
-	
+	//insert into BOARDQ values(BOARD_SEQ.nextval,?,?,?,SYSDATE,?,?,?,?)
 	void insert(BoardQ boardQ) {
-		String sql = INSERT; //insert into BOARDQ values(BOARD_SEQ.nextval,?,?,?,SYSDATE,?,?,?,?)
+		String sql = INSERT; 
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
