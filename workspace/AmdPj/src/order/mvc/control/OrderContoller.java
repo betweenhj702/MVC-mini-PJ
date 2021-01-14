@@ -8,12 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import amd.domain.Member;
+import order.mvc.model.OrderService;
+import order.mvc.vo.OrderVO;
 
 
 @WebServlet("/order/order.do")
 public class OrderContoller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private OrderService service = OrderService.getInstance();
 	private String m ="";
  	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  		m = request.getParameter("m");
@@ -29,25 +35,20 @@ public class OrderContoller extends HttpServlet {
 		}
 	}
  	private void moveOrdPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
- 		/* 주문페이지에 표시할 내역
- 	 	카트에서 넘어올 때 수량을 업데이트 한다
- 	 	
- 	 	
- 	 	
+ 		/* 주문페이지에 표시할 내역 	
  	 	리스팅 : VO로 묶어서 전달하자
- 			
- 			1)리퀘스트에 저장된 장바구니 c_seq >> 이미지이름가격/수량,  
- 				: select p.* from PRODUCT p join CART c on p.P_CODE = (select P_CODE from CART where C_SEQ = ?)
- 				  select * from CART where M_EMAIL = ? and C_VALID=?
- 				
- 				>> 여러 개 Product product + Cart cart
- 				  
+ 			1)세션에 저장된 장바구니 email >> 이미지이름가격/수량,  
+ 				>> 여러 개  Cart cart
  			2)세션에 저장된 m_email >> 이름 메일 전화번호 주소
  				: select * from Member where M_EMAIL = ?
- 				
  				>> 한 개 Member member , pwd는 널로.
  		*/
+ 		HttpSession session = request.getSession();
+ 		Member member = (Member)session.getAttribute("loginUser");
+ 		String m_email = member.getM_email();
  		
+ 		OrderVO orderVO = service.showOrderPage(m_email);
+ 		request.setAttribute("orderVO", orderVO);
  		
  		String view = "order.jsp";
  		RequestDispatcher rd = request.getRequestDispatcher(view);
@@ -63,7 +64,8 @@ public class OrderContoller extends HttpServlet {
  			update CART set C_VALID ='n' where C_SEQ = ?
  		*/
  		
- 		String view = "list.jsp";
+ 		
+ 		String view = "order.do?m=listOrd";
  		RequestDispatcher rd = request.getRequestDispatcher(view);
  		rd.forward(request, response);
  	}

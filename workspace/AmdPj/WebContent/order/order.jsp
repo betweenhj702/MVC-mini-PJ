@@ -82,17 +82,27 @@
                 </tr>
             </thead>
 				<tbody>
-				   <c:if test="${empty product.list}">
+				   <c:if test="${empty orderVO.listC}">
 					   <TR align='center' noshade>
 						  <TD colspan="5">데이터가 없음</TD>
 					   </TR>
 				   </c:if> 
-				   <c:forEach items="${product.list}" var="boardQ">
-							<td>${boardQ.bq_seq}</td>
-							<td>${boardQ.m_name}</td>
-							<td>${boardQ.m_email}</td>
-							<td>${boardQ.bq_seq}</td>
-							<td>${boardQ.bq_seq}</td>
+				   <c:forEach items="${orderVO.listC}" var="cart">
+							<td>
+								<figure class="media">
+									<div class="img-wrap"><img src="../img/${cart.p_img}" width="150" class="img-thumbnail img-sm"></div>
+									<figcaption class="media-body">
+										<h6 class="title text-truncate">${cart.p_name}</h6>
+										<dl class="param param-inline small">
+										  <dt></dt>
+										  <dd></dd>
+										</dl>
+									</figcaption>
+								</figure>
+							</td>
+							<td>${cart.p_price}</td>
+							<td>${cart.c_amount}</td>
+							<td>${cart.p_price * cart.c_amount}</td>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -102,37 +112,37 @@
 			<table class="table table-striped table-hover">
 				<tr>
 					<td width='20%' align='center'>이름</td>
-					<td width='30%'>${boardQ.bq_seq}</td>
+					<td width='30%'>${orderVO.member.m_name}</td>
 					<td width='20%' align='center'>이메일</td>
-					<td width='30%'>${boardQ.bq_count}</td>
+					<td width='30%'>${orderVO.member.m_email}</td>
 				</tr>
 				<tr>
 					<td align='center', colspan='1'>전화번호</td>
-					<td colspan='3'>${boardQ.m_name}</td>
+					<td colspan='3'>${orderVO.member.m_phone}</td>
 				</tr>
 				<tr>
 					<td align='center', colspan='1'>주소</td>
-					<td colspan='3'>${boardQ.m_email}
+					<td colspan='3'>${orderVO.member.m_addr}
 						사용하기 버튼
 					</td>
 				</tr>
             </table>
 		</div>
 		<div class="col-lg-8 col-md-10 mx-auto">
-			<form name="input" method="post" action="board_q.do?m=insert">
+			<form name="input" method="post" action="order.do?m=insertOrd">
 			배송지정보입력<br/><br/>
 			<table class="table table-striped table-hover">
 			  <tr>
 				 <td width="10%" align="center">수령인</td>
-				 <td><input type="text" name="writer" class="form-control" value="${loginUser.m_name}" ></td>
+				 <td><input type="text" name="writer" class="form-control" value="" ></td>
 			  </tr>
 			  <tr>
 				 <td align="center">연락처</td>
-				 <td><input type="text" name="email" class="form-control" value="${loginUser.m_email}" ></td>
+				 <td><input type="text" name="email" class="form-control" value="" ></td>
 			  </tr>
 			  <tr>
 				 <td align="center">배송지 주소</td>
-				 <td><input type="text" name="subject" class="form-control"></td>
+				 <td><input type="text" name="subject" class="form-control" value="${orderVO.member.m_addr}"></td>
 			  </tr>
 			  <tr>
 				 <td align="center">메세지</td>
@@ -140,6 +150,7 @@
 			  </tr>
 			</table>
 			<div align='right'>            
+				총금액 :
 				<input type="button" value="결제" class="btn btn-success">
 				<input type="reset" value="다시작성" class="btn btn-success" onclick="input.subject.focus()">
 			</div>

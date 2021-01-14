@@ -19,13 +19,9 @@ public class OrderService {
 	}
 	
 	public OrderVO showOrderPage(String m_email) {
-		
-		//카트의 구매수량 업데이트
-		
-		List<Product> listP = dao.showProductInCart(m_email);
 		List<Cart> listC = dao.showCartInfo(m_email);
 		Member member = dao.showOrderer(m_email);
-		return new OrderVO(listP, listC, member);
+		return new OrderVO(listC, member);
 	}
 	
 	public void insertOrderS(String m_email, Ord order) {

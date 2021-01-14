@@ -35,38 +35,36 @@ class OrderDAO {
 		}
 	}
 	
-//	"select p.* from PRODUCT p"
-//	+ " join CART c on p.P_CODE = (select P_CODE from CART where C_SEQ = ?)";
-//	"select * from CART where M_EMAIL=? and C_VALID=?";
-	
-	ArrayList<Product> showProductInCart(String m_email){
-		String sql = PRODUCT_IN_CART;
-		ArrayList<Product> listP = new ArrayList<Product>();
-		ResultSet rs = null;
+	//조인한 테이블 컬럼 불러오기 showCartInfo
+	Product showProductInCart(String m_email){
+		String sql2 = PRODUCT_IN_CART;
+		ResultSet rs2 = null;
+		Product product = null;
+		Connection con2 = null;
+		PreparedStatement pstmt2 = null;
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m_email);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				int p_code = rs.getInt("P_CODE");
-				String p_type = rs.getString("P_TYPE");
-				String p_name = rs.getString("P_NAME");
-				int p_price = rs.getInt("P_PRICE");
-				String p_img = rs.getString("P_IMG");
-				String p_info = rs.getString("P_INFO");
-				Product product = new Product(p_code, p_type, p_name, p_price, p_img, p_info);
-				listP.add(product);
+			con2 = ds.getConnection();
+			pstmt2 = con2.prepareStatement(sql2);
+			pstmt2.setString(1, m_email);
+			rs2 = pstmt2.executeQuery();
+			if(rs2.next()) {
+				int p_code = rs2.getInt("P_CODE");
+				String p_type = rs2.getString("P_TYPE");
+				String p_name = rs2.getString("P_NAME");
+				int p_price = rs2.getInt("P_PRICE");
+				String p_img = rs2.getString("P_IMG");
+				String p_info = rs2.getString("P_INFO");
+				product = new Product(p_code, p_type, p_name, p_price, p_img, p_info);
 			}
-			return listP;
+			return product;
 		}catch(SQLException se) {
 			System.out.println(se);
 			return null;
 		}finally {
 			try{
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				if(con != null) con.close();
+				if(rs2 != null) rs2.close();
+				if(pstmt2 != null) pstmt2.close();
+				if(con2 != null) con2.close();
 			}catch(SQLException se){
 			}
 		}
@@ -86,7 +84,13 @@ class OrderDAO {
 				int c_amount = rs.getInt("C_AMOUNT");
 				int p_code = rs.getInt("P_CODE");
 				String c_valid = rs.getString("C_VALID");
-				Cart cart = new Cart(c_seq, m_email, p_code, null, -1, null, c_amount, c_valid);
+				//참조
+				Product product = showProductInCart(m_email);
+				String p_name = product.getP_name();
+				int p_price = product.getP_price();
+				String p_img = product.getP_img();
+				
+				Cart cart = new Cart(c_seq, m_email, p_code, p_name, p_price, p_img, c_amount, c_valid);
 				listC.add(cart);
 			}
 			return listC;

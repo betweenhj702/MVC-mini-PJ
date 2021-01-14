@@ -181,15 +181,8 @@ public class CartController extends HttpServlet {
 		CartService service = CartService.getInstance();
 		service.updateS(cart);
 		
-		String view = "cart.do";
+		String view = "../order/order.do";
 		response.sendRedirect(view);
 	}
 	
-		
-		
-		
-	
-
-	
-
 }

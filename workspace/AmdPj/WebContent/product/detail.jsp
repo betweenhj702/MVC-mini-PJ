@@ -121,8 +121,8 @@
 		</div> <!-- col.// -->
 	</div> <!-- row.// -->
 	<hr>
-	<a href="#" class="btn btn-lg btn-primary text-uppercase"> 바로 구매 </a>
-	<a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> 장바구니 </a>
+	<a href="" class="btn btn-lg btn-primary text-uppercase"> 바로 구매 </a>
+	<a href="../cart/cart.do?m=insert&p_code=${product.p_code}&c_amount=1&p_img=${product.p_img}" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> 장바구니 </a>
 </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
 	</div> <!-- row.// -->
