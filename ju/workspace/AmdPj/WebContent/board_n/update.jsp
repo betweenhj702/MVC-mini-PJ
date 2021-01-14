@@ -39,15 +39,15 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <c:choose>
-          	<c:when test="${empty loginUser}"><a class="nav-link" href="../login/login.do?m=form">로그인</a></c:when>
-          	<c:otherwise><a class="nav-link" href="../login/login.do?m=out">로그아웃</a></c:otherwise>
+          	<c:choose>
+          	<c:when test="${empty loginUser}"><a class="nav-link" href="login/login.do?m=form">로그인</a></c:when>
+          	<c:otherwise><a class="nav-link" href="login/login.do?m=out">로그아웃</a></c:otherwise>
           	</c:choose>
           </li>
           <li class="nav-item">
-            <c:choose>
-          	<c:when test="${empty loginUser}"> <a class="nav-link" href="../member/member.do?m=form">회원가입</a></c:when>
-          	<c:otherwise> <a class="nav-link" href="../member/member.do?m=form">회원정보</a></c:otherwise>
+          	<c:choose>
+          	<c:when test="${empty loginUser}"> <a class="nav-link" href="member/member.do?m=form">회원가입</a></c:when>
+          	<c:otherwise> <a class="nav-link" href="member/member.do?m=goUpdate">회원정보</a></c:otherwise>
           	</c:choose>
           </li>
         </ul>
@@ -67,52 +67,45 @@
       </div>
     </div>
 	<div class="container">
-	  <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
+      <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
       <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
-	  <strong><a class="navbar-brand" href="../board_n/board_n.do">공지게시판</a></strong>
+	  <a class="navbar-brand" href="../board_n/board_n.do">공지게시판</a>
 	  <a class="navbar-brand" href="../board_q/board_q.do">Q&A게시판</a>
      </div>
   </header>
 
+  <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <table class="table table-striped table-hover">
-            <tr>
-				<td width='20%' align='center'>글번호</td>
-				<td width='30%'>${boardN.bn_seq}</td>
-				<td width='20%' align='center'>조회수</td>
-				<td width='30%'>${boardN.bn_count}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>작성자</td>
-				<td colspan='3'>관리자</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>이메일</td>
-				<td colspan='3'>${boardN.m_email}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>제목</td>
-				<td colspan='3'>${boardN.bn_subject}</td>
-			</tr>
-			<tr>
-				<td align='center', colspan='1'>내용</td>
-				<td colspan='3'>${boardN.bn_content}</td>
-			</tr>
-        </table>
-		<div align='right'>  
-		    <a href="board_n.do" class="btn btn-success">목록</a>
-			<c:choose>
-				<c:when test="${loginUser.m_email=='admin@gmail.com'}">
-					<a href="board_n.do?m=update&bn_seq=${boardN.bn_seq}" class="btn btn-success">수정</a>
-					<a href="board_n.do?m=delete&bn_seq=${boardN.bn_seq}" class="btn btn-success">삭제</a>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
-        </div>
+        <form name="input" method="post" action="board_n.do?m=updateOk">
+			글수정<br/><br/>
+			<input type="hidden" name="bn_seq" value="${boardN.bn_seq}">
+			<table class="table table-striped table-hover">
+			  <tr>
+				 <td width="10%" align="center">WRITER</td>
+				 <td><input type="text" name="writer" value="관리자" class="form-control" readonly> </td>
+			  </tr>
+			  <tr>
+				 <td align="center">EMAIL</td>
+				 <td><input type="text" name="bn_email" value="${boardN.m_email}"class="form-control" readonly> </td>
+			  </tr>
+			  <tr>
+				 <td align="center">SUBJECT</td>
+				 <td><input type="text" name="bn_subject" value="${boardN.bn_subject}" class="form-control"> </td>
+			  </tr>
+			  <tr>
+				 <td align="center">CONTENT</td>
+				 <td><textarea  name="bn_content" rows="5" class="form-control">${boardN.bn_content} </textarea></td>
+			  </tr>
+			</table>
+			<div align='right'>            
+				<a href="board_n.do" class="btn btn-success">목록</a>
+				<input type="submit" value="작성" class="btn btn-success">
+				<input type="reset" value="다시작성" class="btn btn-success" onclick="input.subject.focus()">
+			</div>
+		</form>
 	  </div>
     </div>
   </div>

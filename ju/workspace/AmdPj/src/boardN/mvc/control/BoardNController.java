@@ -1,8 +1,6 @@
 package boardN.mvc.control;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,11 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import boardN.mvc.model.BoardNService;
 import boardN.mvc.vo.BoardNVO;
-import boardQ.mvc.model.BoardQService;
 import amd.domain.BoardN;
-import amd.domain.BoardQ;
-import amd.domain.Member;
-
 
 @WebServlet("/board_n/board_n.do")
 public class BoardNController extends HttpServlet {
@@ -35,6 +29,9 @@ public class BoardNController extends HttpServlet {
 				case "write": write(request,response); break;
 				case "insert": insert(request,response); break;
 				case "content": getBoardN(request,response); break;
+				case "update" : getBoardN(request,response); break;
+				case "updateOk": updateOk(request,response); break;
+				case "delete": del(request, response); break;
 				default: list(request, response); break;
 			}
 		}else {
@@ -136,7 +133,7 @@ public class BoardNController extends HttpServlet {
 			String view = "";
 			if(m.equals("content")) {
 				view = "content.jsp";
-			}else { //m.equals("update")
+			}else if(m.equals("update")) {
 				view = "update.jsp";
 			}
 			RequestDispatcher rd = request.getRequestDispatcher(view);
@@ -145,6 +142,33 @@ public class BoardNController extends HttpServlet {
 			String view = "board_n.do";
 			response.sendRedirect(view);
 		}
+	}
+	
+	private void updateOk(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		long bn_seq = getBn_seq(request);
+		String bn_subject = request.getParameter("bn_subject");
+		String bn_content = request.getParameter("bn_content");
+		BoardN boardN = new BoardN(bn_seq, null, bn_subject, bn_content, null, -1);
+		
+		BoardNService service = BoardNService.getInstance();
+		service.updateS(boardN);
+		
+		
+		String view = "board_n.do";
+		response.sendRedirect(view);
+	}
+	
+	private void del(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException{
+		long bn_seq = getBn_seq(request);
+		if(bn_seq != -1L) {
+			BoardNService service = BoardNService.getInstance();
+			service.delS(bn_seq);
+		}
+		
+		String view = "board_n.do";
+		response.sendRedirect(view);
 	}
 	
 	private long getBn_seq(HttpServletRequest request) {

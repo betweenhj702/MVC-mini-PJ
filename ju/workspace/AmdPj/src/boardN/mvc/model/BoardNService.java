@@ -1,11 +1,9 @@
 package boardN.mvc.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import amd.domain.BoardN;
 
-import amd.domain.Member;
 import boardN.mvc.vo.BoardNVO;
 
 public class BoardNService {
@@ -29,7 +27,16 @@ public class BoardNService {
 	}
 	
 	public BoardN getBoardNS(long bn_seq) {
+		dao.updateCnt(bn_seq);
 		return dao.getBoardN(bn_seq);
+	}
+	
+	public void updateS(BoardN boardN) {	
+		dao.update(boardN);
+	}
+	
+	public void delS(long bn_seq) {
+		dao.del(bn_seq);
 	}
 	
 }

@@ -144,6 +144,65 @@ class BoardNDAO {
 		}
 	}
 	
+	void update(BoardN boardN) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = UPDATE;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, boardN.getBn_subject());
+			pstmt.setString(2, boardN.getBn_content());
+			pstmt.setLong(3, boardN.getBn_seq());
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println("BoardDAO update() se: " + se);
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se) {}
+		}
+	}
 	
+	void del(long bn_seq) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = DEL;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, bn_seq);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println("void del(long bn_seq) se: "+se);
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se) {}
+		}
+	}
+	
+	void updateCnt(long bq_seq){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = UPDATECNT;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setLong(1, bq_seq);
+			pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se);
+		}finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			}catch(SQLException se){
+			}
+		}
+	}
+		
 
 }
