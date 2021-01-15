@@ -26,6 +26,7 @@ public class OrderService {
 	
 	public void insertOrderS(String m_email) {
 		//dao.insertOrd(order);
+		System.out.println("stop1");
 		dao.updateCartValid(m_email);
 	}
 	

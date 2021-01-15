@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +14,38 @@
 
   <!-- Bootstrap core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+<style type="text/css">
+.dropbtn {
+    background-color: #FFC800;
+    padding: 15px 28px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #ffff11;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color:000000;
+}
+</style>
   <!-- Custom fonts for this template -->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -66,7 +97,7 @@
     
         // 회원가입 버튼 클릭시 회원가입 화면으로 이동
         function goJoinForm() {
-            location.href="../member/join.jsp";
+            location.href="../member/member.do?m=form";
         }    
     </script>
 </head>
@@ -75,7 +106,7 @@
  <!-- Navigation -->
  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="../index.jsp">아몬드</a>
+      <a class="navbar-brand" href="../index.do">아몬드파티</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -83,10 +114,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="login.jsp">로그인</a>
+            <a class="nav-link" href="">로그인</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../member/join.jsp">회원가입</a>
+            <a class="nav-link" href="../member/member.do?m=form">회원가입</a>
           </li>
         </ul>
       </div>
@@ -105,9 +136,16 @@
       </div>
     </div>
 	<div class="container">
-      <a class="navbar-brand" href="index.html">상품</a>
-	  <a class="navbar-brand" href="index.html">공지게시판</a>
-	  <a class="navbar-brand" href="index.html">Q&A게시판</a>
+      <div class="dropdown">
+        <button class="dropbtn" >상품</button>
+            <div class="dropdown-content">
+             <a class="navbar-brand" href="../product/product.do?cp=1&ps=16">전체 상품</a>
+               <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
+               <a class="navbar-brand" href="../product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
+         	</div>
+		</div>
+	  <a class="navbar-brand" href="../board_n/board_n.do">공지게시판</a>
+	  <a class="navbar-brand" href="../board_q/board_q.do">Q&A게시판</a>
      </div>
   </header>
   

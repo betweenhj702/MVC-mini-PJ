@@ -106,7 +106,7 @@
 		    <a href="board_q.do" class="btn btn-success">목록</a>
 			<c:choose>
 				<c:when test="${empty loginUser}"></c:when>
-				<c:when test="${loginUser==boardQ.m_email}">
+				<c:when test="${loginUser.m_email==boardQ.m_email}">
 					<a href="board_q.do?m=moveUPage&seq=${boardQ.bq_seq}" class="btn btn-success">수정</a>
 					<a href="board_q.do?m=delete&seq=${boardQ.bq_seq}" class="btn btn-success">삭제</a>
 				</c:when>

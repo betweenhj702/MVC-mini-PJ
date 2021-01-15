@@ -48,8 +48,9 @@ public class OrderContoller extends HttpServlet {
  		*/
  		HttpSession session = request.getSession();
  		Member member = (Member)session.getAttribute("loginUser");
- 		String m_email = member.getM_email();
  		
+ 		String m_email = member.getM_email();
+ 		System.out.println(m_email);
  		OrderVO orderVO = service.showOrderPage(m_email);
  		request.setAttribute("orderVO", orderVO);
  		
@@ -66,10 +67,13 @@ public class OrderContoller extends HttpServlet {
  			1. 업데이트 카트 (유효성 변경)
  			update CART set C_VALID ='N' where C_SEQ = any(select C_SEQ from CART c join Member m on c.M_EMAIL = ? and c.C_VALID = 'Y')
  		*/
- 		HttpSession session = request.getSession();
- 		Member member = (Member)session.getAttribute("loginUser");
- 		service.insertOrderS(member.getM_email());
  		
+ 		HttpSession session = request.getSession();
+ 		
+ 		Member member = (Member)session.getAttribute("loginUser");
+ 		
+ 		service.insertOrderS(member.getM_email());
+ 		System.out.println("stop3");
  		String view = "order.do?m=listOrd";
  		RequestDispatcher rd = request.getRequestDispatcher(view);
  		rd.forward(request, response);
@@ -82,7 +86,7 @@ public class OrderContoller extends HttpServlet {
  		*/
  		HttpSession session = request.getSession();
  		Member member = (Member)session.getAttribute("loginUser");
- 		
+ 		System.out.println("stop4");
  		List<Cart> listC = service.showOrderInfoS(member.getM_email());
  		Cart cart = null;
  		if(listC.size()!=0) cart = listC.get(0);

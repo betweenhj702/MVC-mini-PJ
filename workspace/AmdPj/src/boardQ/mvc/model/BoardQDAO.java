@@ -14,9 +14,7 @@ import static boardQ.mvc.model.BoardQSQL.*;
 class BoardQDAO {
 	
 	private DataSource ds;
-	private Connection con;
-	private PreparedStatement pstmt;
-	private Statement stmt;
+	
 	
 	BoardQDAO(){	
 		try {
@@ -31,6 +29,8 @@ class BoardQDAO {
 		ArrayList<BoardQ> list = new ArrayList<BoardQ>();
 		String sql = LIST;
 		ResultSet rs = null;
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		int initRow = (page-1)*pageSize;
 		try {
 			con = ds.getConnection();
@@ -95,6 +95,8 @@ class BoardQDAO {
 	long countRow() {
 		String sql = COUNT;
 		ResultSet rs = null;
+		Connection con =null;
+		Statement stmt = null;
 		long totalCount = 0L;
 		try {
 			con = ds.getConnection();
@@ -118,6 +120,8 @@ class BoardQDAO {
 	//insert into BOARDQ values(BOARD_SEQ.nextval,?,?,?,SYSDATE,?,?,?,?)
 	void insert(BoardQ boardQ) {
 		String sql = INSERT; 
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -144,6 +148,8 @@ class BoardQDAO {
 	int getMaxRef() {
 		String sql = MAX_REF;
 		ResultSet rs = null;
+		Connection con =null;
+		Statement stmt = null;
 		int maxRef = 0;
 		try {
 			con = ds.getConnection();
@@ -165,6 +171,8 @@ class BoardQDAO {
 	}
 	void updateCnt(int bq_seq){
 		String sql = UPDATECNT;
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -184,6 +192,8 @@ class BoardQDAO {
 		String sql = CONTENT;
 		ResultSet rs = null;
 		BoardQ boardq= null;
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -218,6 +228,8 @@ class BoardQDAO {
 
 	void delete(int bq_seq){
 		String sql = DELETE;
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -236,6 +248,8 @@ class BoardQDAO {
 	
 	void update(BoardQ boardQ){
 		String sql = UPDATE;
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -257,6 +271,8 @@ class BoardQDAO {
 	int getNewPLACE(int bq_lev, int place) {
 		String sql = MAX_PLACE;
 		ResultSet rs = null;
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		int newPlace = place + 1;
 		try{
 			con = ds.getConnection();
@@ -281,6 +297,8 @@ class BoardQDAO {
 	}
 	void updatePlace(int refer, int place) {
 		String sql = UPDATE_PLACE;
+		Connection con =null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);

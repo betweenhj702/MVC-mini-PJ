@@ -34,7 +34,7 @@ import member.mvc.model.MemberSet;
 				case "goUpdate": goUpdate(request, response); break;
 				case "update": update(request, response); break;
 	
-				default: response.sendRedirect("../index.jsp");
+				default: response.sendRedirect("../index.do");
 			}
 		}else {
 			response.sendRedirect("../index.do");
@@ -76,7 +76,7 @@ import member.mvc.model.MemberSet;
 	    if(addr != null) addr = addr.trim();
 	    if(addr2 != null) addr2 = addr2.trim();
 	    
-	    System.out.println(email+pwd+name+phone+addr+addr2);
+	    //System.out.println(email+pwd+name+phone+addr+addr2);
 	    MemberService service = MemberService.getInstance();
 	    Member member = new Member(email, pwd, name, phone, addr, addr2, null);
 	    Boolean rCode = service.join(member);
@@ -86,7 +86,7 @@ import member.mvc.model.MemberSet;
 	    	member.setM_pwd("");
 	    	HttpSession session = request.getSession();
 		    session.setAttribute("member", member);
-		    String view = "../login/login.jsp";
+		    String view = "../index.do";
 			response.sendRedirect(view);
 	    }else {
 	    	System.out.println("회원가입 실패");
@@ -134,7 +134,7 @@ import member.mvc.model.MemberSet;
 	    String phone = request.getParameter("phone");
 	    String addr = request.getParameter("addr");
 	    String addr2 = request.getParameter("addr2");
-	    System.out.println(email+pwd);
+	    //System.out.println(email+pwd);
 	    if(email != null) email = email.trim();
 	    if(pwd != null) pwd = pwd.trim();
 	    if(name != null) name = name.trim();
@@ -142,10 +142,10 @@ import member.mvc.model.MemberSet;
 	    if(addr != null) addr = addr.trim();
 	    if(addr2 != null) addr2 = addr2.trim();
 	    
-	    System.out.println(email+ "&"+pwd);
+	    //System.out.println(email+ "&"+pwd);
 	    MemberService service = MemberService.getInstance();
 	    if(service.checkPwd(email, pwd) == MemberSet.YES_ID) {
-	    	System.out.println(1);
+	    	//System.out.println(1);
 		    Member member = new Member(email, newpwd, name, phone, addr, addr2, null);
 		    upCode = service.edit(member);
 	

@@ -22,9 +22,7 @@ import static order.mvc.model.OrderSQL.*;
 
 class OrderDAO {
 	private DataSource ds;
-	private Connection con;
-	private PreparedStatement pstmt;
-	private Statement stmt;
+	
 	
 	OrderDAO(){	
 		try {
@@ -34,7 +32,7 @@ class OrderDAO {
 		}catch(NamingException ne) {
 		}
 	}
-	
+	/*
 	//조인한 테이블 컬럼 불러오기 showCartInfo
 	Product showProductInCart(String m_email){
 		String sql2 = PRODUCT_IN_CART;
@@ -69,11 +67,13 @@ class OrderDAO {
 			}
 		}
 	}
-	
+	*/
 	ArrayList<Cart> showCartInfo(String m_email){
 		String sql = INFO_CART;
 		ArrayList<Cart> listC = new ArrayList<Cart>();
 		ResultSet rs = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -82,15 +82,12 @@ class OrderDAO {
 			while(rs.next()) {
 				int c_seq = rs.getInt("C_SEQ");
 				int c_amount = rs.getInt("C_AMOUNT");
-				int p_code = rs.getInt("P_CODE");
-				String c_valid = rs.getString("C_VALID");
 				//참조
-				Product product = showProductInCart(m_email);
-				String p_name = product.getP_name();
-				int p_price = product.getP_price();
-				String p_img = product.getP_img();
+				String p_name = rs.getString("P_NAME");
+				int p_price = rs.getInt("P_PRICE");
+				String p_img = rs.getString("P_IMG");
 				
-				Cart cart = new Cart(c_seq, m_email, p_code, p_name, p_price, p_img, c_amount, c_valid);
+				Cart cart = new Cart(c_seq, m_email, -1, p_name, p_price, p_img, c_amount, null);
 				listC.add(cart);
 			}
 			return listC;
@@ -111,6 +108,8 @@ class OrderDAO {
 		String sql = INFO_MEMBER;
 		ResultSet rs = null;
 		Member member= null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -138,6 +137,8 @@ class OrderDAO {
 	
 	void insertOrd(Ord order) {
 		String sql = INSERT_ORD; 
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -160,12 +161,16 @@ class OrderDAO {
 	}
 	
 	void updateCartValid(String m_email) {
+		System.out.println("stop2");
 		String sql = UPDATE_CART;
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_email);
 			pstmt.executeUpdate();
+			System.out.println("stop3");
 		}catch(SQLException se) {
 			System.out.println(se);
 		}finally {
@@ -181,6 +186,8 @@ class OrderDAO {
 		String sql = SELECT_CART_NO;
 		ArrayList<Cart> listC = new ArrayList<Cart>();
 		ResultSet rs = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);

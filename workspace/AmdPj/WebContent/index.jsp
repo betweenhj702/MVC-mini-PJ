@@ -23,7 +23,38 @@
 
   <!-- Custom styles for this template -->
   <link href="css/clean-blog.min.css" rel="stylesheet">
-
+<style type="text/css">
+.dropbtn {
+    background-color: #FFC800;
+    padding: 15px 28px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #ffff11;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color:000000;
+}
+  </style>
 </head>
 
 <body>
@@ -31,13 +62,19 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.do">아몬드</a>
+      <a class="navbar-brand" href="index.do">아몬드파티</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+         	<c:choose>
+         	<c:when test="${empty loginUser}"></c:when>
+         	<c:otherwise><a class="nav-link" href="cart/cart.do">장바구니</a></c:otherwise>
+         	</c:choose>
+          </li>
           <li class="nav-item">
           	<c:choose>
           	<c:when test="${empty loginUser}"><a class="nav-link" href="login/login.do?m=form">로그인</a></c:when>
@@ -47,9 +84,10 @@
           <li class="nav-item">
           	<c:choose>
           	<c:when test="${empty loginUser}"> <a class="nav-link" href="member/member.do?m=form">회원가입</a></c:when>
-          	<c:otherwise> <a class="nav-link" href="member/member.do?m=form">회원정보</a></c:otherwise>
+          	<c:otherwise> <a class="nav-link" href="member/member.do?m=goUpdate">회원정보</a></c:otherwise>
           	</c:choose>
           </li>
+          
         </ul>
       </div>
     </div>
@@ -67,10 +105,15 @@
       </div>
     </div>
 	<div class="container">
-      <a class="navbar-brand" href="product/product.do?cp=1&ps=16">전체 상품</a>
-      <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
-      <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
-	  <a class="navbar-brand" href="">공지게시판</a>
+     	<div class="dropdown">
+        <button class="dropbtn" >상품</button>
+            <div class="dropdown-content">
+             <a class="navbar-brand" href="product/product.do?cp=1&ps=16">전체 상품</a>
+               <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=1">아몬드</a>
+               <a class="navbar-brand" href="product/product.do?m=listC&cp=1&ps=16&p_type=2">etc</a>
+         	</div>
+		</div>
+	  <a class="navbar-brand" href="board_n/board_n.do">공지게시판</a>
 	  <a class="navbar-brand" href="board_q/board_q.do">Q&A게시판</a>
      </div>
   </header>
