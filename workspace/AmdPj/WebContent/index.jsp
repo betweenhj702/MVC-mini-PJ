@@ -119,16 +119,28 @@
   </header>
   
 
-  <!-- Main Content -->
+ <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+        <h2><i>4조의 아몬드 파티에 오신 여러분들을 환영합니다~!</i></h2><br>
+        <center>
+        <img src="img/아몬드 bg.png" border=0 width="300" height="200" ></center>
+        <h6><p>4조는 천재조장님 신동오와 똑똑한 권연주 그리고 발표천재 이민용 그리고 귀염둥이 사랑둥이 막둥이 수진이가 있습니당<br>
+               그리고 세상에 단 하나밖에 없는 4조의 아몬드파티~♬ 웹사이트 입니다!</p></h6>
+            <img src="img/amd-fire.png" border=0 width="200" height="200" >
+            <img src="img/amd-toffee.png" border=0 width="200" height="200" >
+            <img src="img/amd-honey.png" border=0 width="200" height="200" >
+            <img src="img/amd-greentea.png" border=0 width="200" height="200" >
+            <img src="img/amd-star.png" border=0 width="200" height="200" >
+            <img src="img/amd-cookie.png" border=0 width="200" height="200" >
+            <img src="img/amd-mayo.png" border=0 width="200" height="200" >
+            <img src="img/maca-cherry.png" border=0 width="200" height="200" >
+            <img src="img/amd-black.png" border=0 width="200" height="200" >
       </div>
     </div>
   </div>
+
 
   <hr>
 
