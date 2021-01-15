@@ -115,13 +115,15 @@
         <img src="img/아몬드 bg.png" border=0 width="300" height="200" ></center>
         <h6><p>4조는 천재조장님 신동오와 똑똑한 권연주 그리고 발표천재 이민용 그리고 막둥이 이수진가 있습니당<br>
                그리고 세상에 단 하나밖에 없는 4조의 아몬드파티~♬ 웹사이트 입니다!</p></h6>
-            <img src="img/amd-fire bg.png" border=0 width="200" height="300" >
-            <img src="img/amd-toffee bg.png" border=0 width="200" height="300" >
-            <img src="img/amd-honey bg.png" border=0 width="200" height="300" >
-            <img src="img/amd-greentea bg.png" border=0 width="200" height="300" >
-            <img src="img/amd-star bg.png" border=0 width="200" height="300" >
-            <img src="img/amd-cookie bg.png" border=0 width="200" height="300" >
-            <img src="img/amd-mayo bg.png" border=0 width="200" height="300" >
+            <img src="img/amd-fire.png" border=0 width="200" height="200" >
+            <img src="img/amd-toffee.png" border=0 width="200" height="200" >
+            <img src="img/amd-honey.png" border=0 width="200" height="200" >
+            <img src="img/amd-greentea.png" border=0 width="200" height="200" >
+            <img src="img/amd-star.png" border=0 width="200" height="200" >
+            <img src="img/amd-cookie.png" border=0 width="200" height="200" >
+            <img src="img/amd-mayo.png" border=0 width="200" height="200" >
+            <img src="img/maca-cherry.png" border=0 width="200" height="200" >
+            <img src="img/amd-black.png" border=0 width="200" height="200" >
       </div>
     </div>
   </div>
