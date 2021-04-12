@@ -13,3 +13,9 @@ For six days of this Semi Project,  I practiced how to code an Website  and lear
 - 사용 기술
   * Eclipse EE, MVC model project, JDBC, Oracle, Tomcat9, JSP/Servlet
   * html, css, javascript
+
+## DB 모델링
+![DB모델링](https://user-images.githubusercontent.com/75344320/114370016-f5cc6400-9bb9-11eb-83ee-856528b80f3d.PNG)
+
+## 서비스 스토리 보드
+![스토리보드](https://user-images.githubusercontent.com/75344320/114370065-011f8f80-9bba-11eb-94cd-3385b13f2dc7.PNG)
